@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -12,85 +13,183 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search, GraduationCap, MapPin, DollarSign, Heart } from "lucide-react";
+import { Search, GraduationCap, MapPin, X, Clock, Award, TrendingUp } from "lucide-react";
 
 const Universities = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const [degreeLevel, setDegreeLevel] = useState("");
+  const [studyField, setStudyField] = useState("");
+  const [country, setCountry] = useState("");
+  const [tuitionRange, setTuitionRange] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const universities = [
+  const activeFilters = [
+    { key: "degreeLevel", value: degreeLevel, label: "Degree Level" },
+    { key: "studyField", value: studyField, label: "Study Field" },
+    { key: "country", value: country, label: "Country" },
+    { key: "tuitionRange", value: tuitionRange, label: "Tuition Range" },
+  ].filter(f => f.value);
+
+  const clearFilter = (key: string) => {
+    switch(key) {
+      case "degreeLevel": setDegreeLevel(""); break;
+      case "studyField": setStudyField(""); break;
+      case "country": setCountry(""); break;
+      case "tuitionRange": setTuitionRange(""); break;
+    }
+  };
+
+  const clearAllFilters = () => {
+    setSearchQuery("");
+    setDegreeLevel("");
+    setStudyField("");
+    setCountry("");
+    setTuitionRange("");
+  };
+
+  const programs = [
     {
       id: 1,
-      name: "Stanford University",
+      universityName: "Stanford University",
       country: "United States",
       location: "California",
+      programTitle: "Master of Science in Computer Science",
+      degreeType: "Master's",
       field: "Computer Science",
       tuition: "$27,100/year",
-      visaFee: "$160",
       applicationFee: "$90",
-      focusedProgram: true,
+      duration: "2 years",
+      intakeDates: ["Fall 2025", "Spring 2026"],
+      badges: ["Scholarship Available", "High Job Demand"],
       ranking: 1
     },
     {
       id: 2,
-      name: "University of Oxford",
+      universityName: "University of Oxford",
       country: "United Kingdom",
       location: "Oxford",
-      field: "Business Administration",
+      programTitle: "MBA - Business Administration",
+      degreeType: "Master's",
+      field: "Business",
       tuition: "£26,770/year",
-      visaFee: "£363",
       applicationFee: "£75",
-      focusedProgram: false,
+      duration: "1 year",
+      intakeDates: ["Fall 2025"],
+      badges: ["High Job Demand"],
       ranking: 2
     },
     {
       id: 3,
-      name: "University of Toronto",
+      universityName: "University of Toronto",
       country: "Canada",
       location: "Toronto",
+      programTitle: "Bachelor of Engineering",
+      degreeType: "Bachelor's",
       field: "Engineering",
       tuition: "CAD $58,160/year",
-      visaFee: "CAD $150",
       applicationFee: "CAD $156",
-      focusedProgram: true,
+      duration: "4 years",
+      intakeDates: ["Fall 2025", "Spring 2026"],
+      badges: ["Scholarship Available"],
       ranking: 3
     },
     {
       id: 4,
-      name: "ETH Zurich",
+      universityName: "ETH Zurich",
       country: "Switzerland",
       location: "Zurich",
+      programTitle: "Master in Computer Science",
+      degreeType: "Master's",
       field: "Computer Science",
       tuition: "CHF 1,460/year",
-      visaFee: "CHF 100",
       applicationFee: "CHF 150",
-      focusedProgram: true,
+      duration: "2 years",
+      intakeDates: ["Fall 2025"],
+      badges: ["Scholarship Available", "High Job Demand"],
       ranking: 7
     },
     {
       id: 5,
-      name: "University of Melbourne",
+      universityName: "University of Melbourne",
       country: "Australia",
       location: "Melbourne",
+      programTitle: "Doctor of Medicine (MD)",
+      degreeType: "Doctorate",
       field: "Medicine",
       tuition: "AUD $45,824/year",
-      visaFee: "AUD $620",
       applicationFee: "AUD $100",
-      focusedProgram: true,
+      duration: "4 years",
+      intakeDates: ["Fall 2025"],
+      badges: ["High Job Demand"],
       ranking: 14
     },
     {
       id: 6,
-      name: "National University of Singapore",
+      universityName: "National University of Singapore",
       country: "Singapore",
       location: "Singapore",
+      programTitle: "Bachelor of Business Administration",
+      degreeType: "Bachelor's",
       field: "Business",
       tuition: "SGD $29,950/year",
-      visaFee: "SGD $30",
       applicationFee: "SGD $20",
-      focusedProgram: false,
+      duration: "3 years",
+      intakeDates: ["Fall 2025", "Spring 2026"],
+      badges: ["Scholarship Available"],
       ranking: 8
+    },
+    {
+      id: 7,
+      universityName: "MIT",
+      country: "United States",
+      location: "Massachusetts",
+      programTitle: "Master of Engineering in AI",
+      degreeType: "Master's",
+      field: "Computer Science",
+      tuition: "$29,750/year",
+      applicationFee: "$95",
+      duration: "2 years",
+      intakeDates: ["Fall 2025"],
+      badges: ["Scholarship Available", "High Job Demand"],
+      ranking: 1
+    },
+    {
+      id: 8,
+      universityName: "University of Cambridge",
+      country: "United Kingdom",
+      location: "Cambridge",
+      programTitle: "BA Economics",
+      degreeType: "Bachelor's",
+      field: "Economics",
+      tuition: "£22,227/year",
+      applicationFee: "£75",
+      duration: "3 years",
+      intakeDates: ["Fall 2025"],
+      badges: ["High Job Demand"],
+      ranking: 3
+    },
+    {
+      id: 9,
+      universityName: "University of British Columbia",
+      country: "Canada",
+      location: "Vancouver",
+      programTitle: "Master of Data Science",
+      degreeType: "Master's",
+      field: "Data Science",
+      tuition: "CAD $42,000/year",
+      applicationFee: "CAD $125",
+      duration: "10 months",
+      intakeDates: ["Fall 2025", "Spring 2026"],
+      badges: ["Scholarship Available", "High Job Demand"],
+      ranking: 35
     }
   ];
+
+  const itemsPerPage = 9;
+  const totalPages = Math.ceil(programs.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const displayedPrograms = programs.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <div className="min-h-screen bg-background">
@@ -99,9 +198,9 @@ const Universities = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">University Finder</h1>
+          <h1 className="text-4xl font-bold mb-2">Program Search</h1>
           <p className="text-xl text-muted-foreground">
-            Discover and compare universities worldwide
+            Find your perfect program from top universities worldwide
           </p>
         </div>
 
@@ -122,47 +221,49 @@ const Universities = () => {
 
               {/* Filters */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <Select>
+                <Select value={degreeLevel} onValueChange={setDegreeLevel}>
                   <SelectTrigger>
                     <SelectValue placeholder="Degree Level" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-popover z-50">
                     <SelectItem value="bachelors">Bachelor's</SelectItem>
                     <SelectItem value="masters">Master's</SelectItem>
-                    <SelectItem value="phd">PhD</SelectItem>
+                    <SelectItem value="doctorate">Doctorate</SelectItem>
                   </SelectContent>
                 </Select>
 
-                <Select>
+                <Select value={studyField} onValueChange={setStudyField}>
                   <SelectTrigger>
                     <SelectValue placeholder="Study Field" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-popover z-50">
                     <SelectItem value="cs">Computer Science</SelectItem>
                     <SelectItem value="business">Business</SelectItem>
                     <SelectItem value="engineering">Engineering</SelectItem>
                     <SelectItem value="medicine">Medicine</SelectItem>
+                    <SelectItem value="data-science">Data Science</SelectItem>
                   </SelectContent>
                 </Select>
 
-                <Select>
+                <Select value={country} onValueChange={setCountry}>
                   <SelectTrigger>
                     <SelectValue placeholder="Country" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-popover z-50">
                     <SelectItem value="usa">United States</SelectItem>
                     <SelectItem value="uk">United Kingdom</SelectItem>
                     <SelectItem value="canada">Canada</SelectItem>
                     <SelectItem value="australia">Australia</SelectItem>
-                    <SelectItem value="germany">Germany</SelectItem>
+                    <SelectItem value="singapore">Singapore</SelectItem>
+                    <SelectItem value="switzerland">Switzerland</SelectItem>
                   </SelectContent>
                 </Select>
 
-                <Select>
+                <Select value={tuitionRange} onValueChange={setTuitionRange}>
                   <SelectTrigger>
                     <SelectValue placeholder="Tuition Range" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-popover z-50">
                     <SelectItem value="0-10k">$0 - $10,000</SelectItem>
                     <SelectItem value="10k-30k">$10,000 - $30,000</SelectItem>
                     <SelectItem value="30k+">$30,000+</SelectItem>
@@ -170,92 +271,177 @@ const Universities = () => {
                 </Select>
               </div>
 
-              <Button className="w-full md:w-auto bg-gradient-accent">
-                Apply Filters
-              </Button>
+              {/* Active Filters */}
+              {activeFilters.length > 0 && (
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-sm text-muted-foreground">Active filters:</span>
+                  {activeFilters.map((filter) => (
+                    <Badge 
+                      key={filter.key} 
+                      variant="secondary" 
+                      className="gap-1 pr-1"
+                    >
+                      {filter.value}
+                      <button
+                        onClick={() => clearFilter(filter.key)}
+                        className="ml-1 rounded-full hover:bg-muted"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </Badge>
+                  ))}
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={clearAllFilters}
+                    className="text-xs h-7"
+                  >
+                    Clear All
+                  </Button>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>
 
         {/* Results Count */}
-        <div className="mb-6">
+        <div className="mb-6 flex justify-between items-center">
           <p className="text-muted-foreground">
-            Showing <span className="font-semibold text-foreground">{universities.length}</span> universities
+            Showing <span className="font-semibold text-foreground">{displayedPrograms.length}</span> of <span className="font-semibold text-foreground">{programs.length}</span> programs
           </p>
         </div>
 
-        {/* University Cards */}
-        <div className="grid gap-6">
-          {universities.map((uni) => (
-            <Card key={uni.id} className="hover:shadow-lg transition-all border-2 hover:border-primary">
-              <CardContent className="pt-6">
-                <div className="grid md:grid-cols-[auto,1fr,auto] gap-6">
-                  {/* University Logo/Image */}
-                  <div className="w-24 h-24 bg-gradient-to-br from-primary to-primary-glow rounded-lg flex items-center justify-center shrink-0">
-                    <GraduationCap className="h-12 w-12 text-white" />
-                  </div>
-
-                  {/* University Info */}
-                  <div className="space-y-3">
-                    <div>
-                      <div className="flex items-start justify-between gap-4 mb-2">
-                        <h3 className="text-2xl font-bold">{uni.name}</h3>
-                        {uni.focusedProgram && (
-                          <Badge className="bg-accent text-accent-foreground">
-                            Focused Program
-                          </Badge>
-                        )}
-                      </div>
-                      <div className="flex flex-wrap items-center gap-4 text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <MapPin className="h-4 w-4" />
-                          <span>{uni.location}, {uni.country}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Badge variant="outline">Ranking: #{uni.ranking}</Badge>
-                        </div>
-                      </div>
+        {/* Program Cards Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {displayedPrograms.map((program) => (
+            <Card key={program.id} className="hover:shadow-lg transition-all border-2 hover:border-primary flex flex-col">
+              <CardContent className="pt-6 flex-1 flex flex-col">
+                {/* University Info */}
+                <div className="mb-4">
+                  <div className="flex items-start gap-3 mb-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-glow rounded-lg flex items-center justify-center shrink-0">
+                      <GraduationCap className="h-6 w-6 text-white" />
                     </div>
-
-                    <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                      <div>
-                        <p className="text-muted-foreground">Tuition Fee</p>
-                        <p className="font-semibold text-lg">{uni.tuition}</p>
-                      </div>
-                      <div>
-                        <p className="text-muted-foreground">Visa Fee</p>
-                        <p className="font-semibold">{uni.visaFee}</p>
-                      </div>
-                      <div>
-                        <p className="text-muted-foreground">Application Fee</p>
-                        <p className="font-semibold">{uni.applicationFee}</p>
-                      </div>
-                      <div>
-                        <p className="text-muted-foreground">Field</p>
-                        <p className="font-semibold">{uni.field}</p>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-lg mb-1 line-clamp-1">{program.universityName}</h3>
+                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                        <MapPin className="h-3 w-3 shrink-0" />
+                        <span className="truncate">{program.location}, {program.country}</span>
                       </div>
                     </div>
                   </div>
-
-                  {/* Actions */}
-                  <div className="flex md:flex-col gap-2 shrink-0">
-                    <Button className="w-full bg-gradient-accent">
-                      Apply Now
-                    </Button>
-                    <Button variant="outline" size="icon">
-                      <Heart className="h-4 w-4" />
-                    </Button>
+                  
+                  {/* Program Title */}
+                  <h4 className="font-semibold text-base mb-2 line-clamp-2 min-h-[2.5rem]">{program.programTitle}</h4>
+                  
+                  {/* Degree Type */}
+                  <p className="text-sm text-muted-foreground mb-3">{program.degreeType} • {program.field}</p>
+                  
+                  {/* Badges */}
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    {program.badges.map((badge, idx) => (
+                      <Badge 
+                        key={idx} 
+                        variant="secondary"
+                        className={badge === "Scholarship Available" ? "bg-accent/10 text-accent" : "bg-primary/10 text-primary"}
+                      >
+                        {badge === "Scholarship Available" && <Award className="h-3 w-3 mr-1" />}
+                        {badge === "High Job Demand" && <TrendingUp className="h-3 w-3 mr-1" />}
+                        {badge}
+                      </Badge>
+                    ))}
                   </div>
+                </div>
+
+                {/* Program Details */}
+                <div className="space-y-2 text-sm mb-4">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Tuition</span>
+                    <span className="font-semibold">{program.tuition}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Application Fee</span>
+                    <span className="font-semibold">{program.applicationFee}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Duration</span>
+                    <span className="font-semibold">{program.duration}</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-2">
+                    <span className="text-muted-foreground shrink-0">Intake Dates</span>
+                    <div className="flex flex-wrap gap-1 justify-end">
+                      {program.intakeDates.map((date, idx) => (
+                        <Badge key={idx} variant="outline" className="text-xs">
+                          <Clock className="h-3 w-3 mr-1" />
+                          {date}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="flex gap-2 mt-auto pt-4 border-t">
+                  <Button 
+                    className="flex-1 bg-gradient-accent hover:opacity-90" 
+                    size="sm"
+                    onClick={() => navigate(`/program/${program.id}`)}
+                  >
+                    View Details
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="bg-primary text-primary-foreground hover:bg-primary/90" 
+                    size="sm"
+                    onClick={() => navigate(`/program/${program.id}`)}
+                  >
+                    Apply Now
+                  </Button>
                 </div>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        {/* Load More */}
-        <div className="mt-8 text-center">
-          <Button variant="outline" size="lg">
-            Load More Universities
+        {/* Pagination */}
+        <div className="mt-8 flex justify-center items-center gap-2">
+          <Button
+            variant="outline"
+            onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+            disabled={currentPage === 1}
+          >
+            &lt; Prev
+          </Button>
+          
+          {[...Array(totalPages)].map((_, idx) => {
+            const pageNum = idx + 1;
+            if (
+              pageNum === 1 ||
+              pageNum === totalPages ||
+              (pageNum >= currentPage - 1 && pageNum <= currentPage + 1)
+            ) {
+              return (
+                <Button
+                  key={pageNum}
+                  variant={currentPage === pageNum ? "default" : "outline"}
+                  onClick={() => setCurrentPage(pageNum)}
+                  className={currentPage === pageNum ? "bg-primary" : ""}
+                >
+                  {pageNum}
+                </Button>
+              );
+            } else if (pageNum === currentPage - 2 || pageNum === currentPage + 2) {
+              return <span key={pageNum} className="px-2">...</span>;
+            }
+            return null;
+          })}
+          
+          <Button
+            variant="outline"
+            onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+            disabled={currentPage === totalPages}
+          >
+            Next &gt;
           </Button>
         </div>
       </div>
