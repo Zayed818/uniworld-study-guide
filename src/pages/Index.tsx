@@ -18,8 +18,10 @@ import {
   CheckCircle2
 } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Index = () => {
+  const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
   const [destination, setDestination] = useState("");
   const [degreeType, setDegreeType] = useState("");
@@ -29,23 +31,23 @@ const Index = () => {
   const highlights = [
     {
       icon: <Shield className="h-10 w-10 text-primary" />,
-      title: "Verified Universities",
-      description: "All partner universities are thoroughly vetted and accredited"
+      title: t('highlight.verified.title'),
+      description: t('highlight.verified.desc')
     },
     {
       icon: <Award className="h-10 w-10 text-primary" />,
-      title: "Scholarships Available",
-      description: "Access thousands of funding opportunities worldwide"
+      title: t('highlight.scholarships.title'),
+      description: t('highlight.scholarships.desc')
     },
     {
       icon: <Users className="h-10 w-10 text-primary" />,
-      title: "Trusted by Students",
-      description: "Join 10,000+ students who found their perfect match"
+      title: t('highlight.trusted.title'),
+      description: t('highlight.trusted.desc')
     },
     {
       icon: <CheckCircle2 className="h-10 w-10 text-primary" />,
-      title: "Apply in 3 Steps",
-      description: "Simple application process with expert guidance"
+      title: t('highlight.easy.title'),
+      description: t('highlight.easy.desc')
     }
   ];
 
@@ -61,10 +63,10 @@ const Index = () => {
           <div className="max-w-4xl mx-auto space-y-8">
             <div className="text-center space-y-4">
               <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                Find Your Perfect University Abroad
+                {t('hero.title')}
               </h1>
               <p className="text-lg md:text-xl text-white/90">
-                Discover universities, apply with confidence, and start your journey
+                {t('hero.subtitle')}
               </p>
             </div>
             
@@ -74,7 +76,7 @@ const Index = () => {
                 <div className="relative">
                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                   <Input 
-                    placeholder="Search by university, program, or country"
+                    placeholder={t('hero.search.placeholder')}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="h-14 pl-12 text-base border-0 bg-secondary/50 focus-visible:ring-2"
@@ -85,26 +87,26 @@ const Index = () => {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   <Select value={destination} onValueChange={setDestination}>
                     <SelectTrigger className="h-12 bg-background">
-                      <SelectValue placeholder="Destination" />
+                      <SelectValue placeholder={t('hero.filter.destination')} />
                     </SelectTrigger>
                     <SelectContent className="bg-popover z-50">
-                      <SelectItem value="usa">United States</SelectItem>
-                      <SelectItem value="uk">United Kingdom</SelectItem>
-                      <SelectItem value="canada">Canada</SelectItem>
-                      <SelectItem value="australia">Australia</SelectItem>
-                      <SelectItem value="germany">Germany</SelectItem>
+                      <SelectItem value="usa">{t('country.usa')}</SelectItem>
+                      <SelectItem value="uk">{t('country.uk')}</SelectItem>
+                      <SelectItem value="canada">{t('country.canada')}</SelectItem>
+                      <SelectItem value="australia">{t('country.australia')}</SelectItem>
+                      <SelectItem value="germany">{t('country.germany')}</SelectItem>
                     </SelectContent>
                   </Select>
 
                   <Select value={degreeType} onValueChange={setDegreeType}>
                     <SelectTrigger className="h-12 bg-background">
-                      <SelectValue placeholder="Degree Type" />
+                      <SelectValue placeholder={t('hero.filter.degree')} />
                     </SelectTrigger>
                     <SelectContent className="bg-popover z-50">
-                      <SelectItem value="bachelor">Bachelor's</SelectItem>
-                      <SelectItem value="master">Master's</SelectItem>
-                      <SelectItem value="phd">PhD</SelectItem>
-                      <SelectItem value="diploma">Diploma</SelectItem>
+                      <SelectItem value="bachelor">{t('degree.bachelor')}</SelectItem>
+                      <SelectItem value="master">{t('degree.master')}</SelectItem>
+                      <SelectItem value="phd">{t('degree.phd')}</SelectItem>
+                      <SelectItem value="diploma">{t('degree.diploma')}</SelectItem>
                     </SelectContent>
                   </Select>
 
@@ -137,7 +139,7 @@ const Index = () => {
                   size="lg" 
                   className="w-full h-12 bg-gradient-accent hover:opacity-90 text-base font-semibold"
                 >
-                  Find Programs
+                  {t('hero.cta')}
                 </Button>
               </div>
             </div>

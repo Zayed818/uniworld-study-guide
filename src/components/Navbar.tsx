@@ -8,24 +8,27 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [language, setLanguage] = useState("English");
+  const { language, setLanguage, t } = useLanguage();
   const location = useLocation();
 
   const navLinks = [
-    { name: "Universities", path: "/universities" },
-    { name: "Programs", path: "/universities" },
-    { name: "About", path: "#about" },
-    { name: "Support", path: "#support" },
+    { name: t('nav.universities'), path: "/universities" },
+    { name: t('nav.programs'), path: "/universities" },
+    { name: t('nav.about'), path: "#about" },
+    { name: t('nav.support'), path: "#support" },
   ];
 
   const languages = [
-    { name: "O'zbekcha", code: "uz" },
-    { name: "Русский", code: "ru" },
-    { name: "English", code: "en" },
+    { name: "O'zbekcha", code: "uz" as const },
+    { name: "Русский", code: "ru" as const },
+    { name: "English", code: "en" as const },
   ];
+  
+  const currentLanguageName = languages.find(lang => lang.code === language)?.name || "English";
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -61,7 +64,7 @@ const Navbar = () => {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="gap-1">
                   <Globe className="h-4 w-4" />
-                  {language}
+                  {currentLanguageName}
                   <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
@@ -69,7 +72,7 @@ const Navbar = () => {
                 {languages.map((lang) => (
                   <DropdownMenuItem
                     key={lang.code}
-                    onClick={() => setLanguage(lang.name)}
+                    onClick={() => setLanguage(lang.code)}
                     className="cursor-pointer"
                   >
                     {lang.name}
@@ -77,8 +80,8 @@ const Navbar = () => {
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
-            <Button variant="outline">Log In</Button>
-            <Button className="bg-gradient-accent">Register</Button>
+            <Button variant="outline">{t('nav.login')}</Button>
+            <Button className="bg-gradient-accent">{t('nav.register')}</Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -112,7 +115,7 @@ const Navbar = () => {
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline" className="w-full gap-1">
                     <Globe className="h-4 w-4" />
-                    {language}
+                    {currentLanguageName}
                     <ChevronDown className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
@@ -120,7 +123,7 @@ const Navbar = () => {
                   {languages.map((lang) => (
                     <DropdownMenuItem
                       key={lang.code}
-                      onClick={() => setLanguage(lang.name)}
+                      onClick={() => setLanguage(lang.code)}
                       className="cursor-pointer"
                     >
                       {lang.name}
@@ -129,10 +132,10 @@ const Navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
               <Button variant="outline" className="w-full">
-                Log In
+                {t('nav.login')}
               </Button>
               <Button className="w-full bg-gradient-accent">
-                Register
+                {t('nav.register')}
               </Button>
             </div>
           </div>
