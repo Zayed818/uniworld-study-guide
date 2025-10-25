@@ -14,9 +14,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Search, GraduationCap, MapPin, X, Clock, Award, TrendingUp } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Universities = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
   const [degreeLevel, setDegreeLevel] = useState("");
   const [studyField, setStudyField] = useState("");
@@ -25,10 +27,10 @@ const Universities = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const activeFilters = [
-    { key: "degreeLevel", value: degreeLevel, label: "Degree Level" },
-    { key: "studyField", value: studyField, label: "Study Field" },
-    { key: "country", value: country, label: "Country" },
-    { key: "tuitionRange", value: tuitionRange, label: "Tuition Range" },
+    { key: "degreeLevel", value: degreeLevel, label: t('universities.filter.degreeLevel') },
+    { key: "studyField", value: studyField, label: t('universities.filter.studyField') },
+    { key: "country", value: country, label: t('universities.filter.country') },
+    { key: "tuitionRange", value: tuitionRange, label: t('universities.filter.tuition') },
   ].filter(f => f.value);
 
   const clearFilter = (key: string) => {
@@ -198,9 +200,9 @@ const Universities = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Program Search</h1>
+          <h1 className="text-4xl font-bold mb-2">{t('universities.title')}</h1>
           <p className="text-xl text-muted-foreground">
-            Find your perfect program from top universities worldwide
+            {t('universities.subtitle')}
           </p>
         </div>
 
@@ -212,7 +214,7 @@ const Universities = () => {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input
-                  placeholder="Search by university name, program, or location..."
+                  placeholder={t('universities.search.placeholder')}
                   className="pl-10 h-12"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -223,18 +225,18 @@ const Universities = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <Select value={degreeLevel} onValueChange={setDegreeLevel}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Degree Level" />
+                    <SelectValue placeholder={t('universities.filter.degreeLevel')} />
                   </SelectTrigger>
                   <SelectContent className="bg-popover z-50">
-                    <SelectItem value="bachelors">Bachelor's</SelectItem>
-                    <SelectItem value="masters">Master's</SelectItem>
-                    <SelectItem value="doctorate">Doctorate</SelectItem>
+                    <SelectItem value="bachelors">{t('degree.bachelor')}</SelectItem>
+                    <SelectItem value="masters">{t('degree.master')}</SelectItem>
+                    <SelectItem value="doctorate">{t('degree.phd')}</SelectItem>
                   </SelectContent>
                 </Select>
 
                 <Select value={studyField} onValueChange={setStudyField}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Study Field" />
+                    <SelectValue placeholder={t('universities.filter.studyField')} />
                   </SelectTrigger>
                   <SelectContent className="bg-popover z-50">
                     <SelectItem value="cs">Computer Science</SelectItem>
@@ -247,13 +249,13 @@ const Universities = () => {
 
                 <Select value={country} onValueChange={setCountry}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Country" />
+                    <SelectValue placeholder={t('universities.filter.country')} />
                   </SelectTrigger>
                   <SelectContent className="bg-popover z-50">
-                    <SelectItem value="usa">United States</SelectItem>
-                    <SelectItem value="uk">United Kingdom</SelectItem>
-                    <SelectItem value="canada">Canada</SelectItem>
-                    <SelectItem value="australia">Australia</SelectItem>
+                    <SelectItem value="usa">{t('country.usa')}</SelectItem>
+                    <SelectItem value="uk">{t('country.uk')}</SelectItem>
+                    <SelectItem value="canada">{t('country.canada')}</SelectItem>
+                    <SelectItem value="australia">{t('country.australia')}</SelectItem>
                     <SelectItem value="singapore">Singapore</SelectItem>
                     <SelectItem value="switzerland">Switzerland</SelectItem>
                   </SelectContent>
@@ -261,7 +263,7 @@ const Universities = () => {
 
                 <Select value={tuitionRange} onValueChange={setTuitionRange}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Tuition Range" />
+                    <SelectValue placeholder={t('universities.filter.tuition')} />
                   </SelectTrigger>
                   <SelectContent className="bg-popover z-50">
                     <SelectItem value="0-10k">$0 - $10,000</SelectItem>
@@ -307,7 +309,7 @@ const Universities = () => {
         {/* Results Count */}
         <div className="mb-6 flex justify-between items-center">
           <p className="text-muted-foreground">
-            Showing <span className="font-semibold text-foreground">{displayedPrograms.length}</span> of <span className="font-semibold text-foreground">{programs.length}</span> programs
+            {t('universities.showing')} <span className="font-semibold text-foreground">{displayedPrograms.length}</span> {t('universities.of')} <span className="font-semibold text-foreground">{programs.length}</span> {t('universities.programs')}
           </p>
         </div>
 
@@ -356,19 +358,19 @@ const Universities = () => {
                 {/* Program Details */}
                 <div className="space-y-2 text-sm mb-4">
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Tuition</span>
+                    <span className="text-muted-foreground">{t('universities.tuition')}</span>
                     <span className="font-semibold">{program.tuition}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Application Fee</span>
+                    <span className="text-muted-foreground">{t('universities.applicationFee')}</span>
                     <span className="font-semibold">{program.applicationFee}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Duration</span>
+                    <span className="text-muted-foreground">{t('universities.duration')}</span>
                     <span className="font-semibold">{program.duration}</span>
                   </div>
                   <div className="flex items-start justify-between gap-2">
-                    <span className="text-muted-foreground shrink-0">Intake Dates</span>
+                    <span className="text-muted-foreground shrink-0">{t('universities.intakeDates')}</span>
                     <div className="flex flex-wrap gap-1 justify-end">
                       {program.intakeDates.map((date, idx) => (
                         <Badge key={idx} variant="outline" className="text-xs">
@@ -387,7 +389,7 @@ const Universities = () => {
                     size="sm"
                     onClick={() => navigate(`/program/${program.id}`)}
                   >
-                    View Details
+                    {t('universities.viewDetails')}
                   </Button>
                   <Button 
                     variant="outline" 
@@ -395,7 +397,7 @@ const Universities = () => {
                     size="sm"
                     onClick={() => navigate(`/program/${program.id}`)}
                   >
-                    Apply Now
+                    {t('universities.applyNow')}
                   </Button>
                 </div>
               </CardContent>

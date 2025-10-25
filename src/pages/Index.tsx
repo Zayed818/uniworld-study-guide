@@ -200,16 +200,16 @@ const Index = () => {
           <div className="text-center mb-12">
             <GraduationCap className="h-12 w-12 text-primary mx-auto mb-4" />
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              {t('universities.title')}
+              {t('universities.home.title')}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {t('universities.subtitle')}
+              {t('universities.home.subtitle')}
             </p>
           </div>
           <div className="text-center">
             <Button size="lg" className="bg-gradient-accent" asChild>
               <Link to="/universities">
-                {t('universities.viewAll')}
+                {t('universities.home.viewAll')}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
@@ -223,16 +223,16 @@ const Index = () => {
           <div className="text-center mb-12">
             <Award className="h-12 w-12 text-primary mx-auto mb-4" />
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              {t('scholarships.title')}
+              {t('scholarships.home.title')}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {t('scholarships.subtitle')}
+              {t('scholarships.home.subtitle')}
             </p>
           </div>
           <div className="text-center">
             <Button size="lg" className="bg-gradient-accent" asChild>
               <Link to="/scholarships">
-                {t('scholarships.viewAll')}
+                {t('scholarships.home.viewAll')}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
@@ -246,16 +246,16 @@ const Index = () => {
           <div className="text-center mb-12">
             <Briefcase className="h-12 w-12 text-primary mx-auto mb-4" />
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              {t('careers.title')}
+              {t('careers.home.title')}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {t('careers.subtitle')}
+              {t('careers.home.subtitle')}
             </p>
           </div>
           <div className="text-center">
             <Button size="lg" className="bg-gradient-accent" asChild>
               <Link to="/careers">
-                {t('careers.viewAll')}
+                {t('careers.home.viewAll')}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
