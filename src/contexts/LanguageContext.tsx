@@ -13,65 +13,85 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 const translations = {
   en: {
     // Navbar
+    'nav.findPrograms': 'Find Programs',
     'nav.universities': 'Universities',
-    'nav.programs': 'Programs',
-    'nav.about': 'About',
-    'nav.support': 'Support',
+    'nav.scholarships': 'Scholarships',
+    'nav.careers': 'Careers',
+    'nav.getSupport': 'Get Support',
+    'nav.faq': 'FAQ',
     'nav.login': 'Log In',
-    'nav.register': 'Register',
+    'nav.register': 'Sign Up',
+    'nav.stickyCta': 'Find My Dream University',
     
-    // Homepage Hero
+    // Hero Section
     'hero.title': 'Find Your Dream University and Scholarship',
     'hero.subtitle': 'From Tashkent to Toronto — join thousands of students who turned their study abroad dream into reality.',
-    'hero.search.placeholder': 'Search by university, program, or country',
-    'hero.filter.destination': 'Country',
-    'hero.filter.degree': 'Degree Level',
-    'hero.filter.field': 'Field of Study',
-    'hero.filter.intake': 'Intake Date',
+    'hero.country.placeholder': 'Select Country',
+    'hero.degree.placeholder': 'Choose Degree Level',
     'hero.cta': 'See My Best Matches',
     
     // Trust Stats
-    'stats.students': '50,000+ Students Guided',
-    'stats.success': '95% Success Rate',
-    'stats.scholarships': '5,000+ Scholarships',
+    'stats.students': '50K+ students guided',
+    'stats.success': '95% success rate',
+    'stats.scholarships': '5,000+ scholarships',
+    
+    // Advantages Section
+    'advantages.title': 'Why Students Choose StudyPath',
+    'advantages.personalized.title': 'Personalized Matches',
+    'advantages.personalized.desc': 'Get universities and scholarships tailored to your profile.',
+    'advantages.trusted.title': 'Trusted Support',
+    'advantages.trusted.desc': 'Verified partners and programs you can rely on.',
+    'advantages.save.title': 'Save Time & Effort',
+    'advantages.save.desc': 'One platform for programs, scholarships, and career guidance.',
+    'advantages.smart.title': 'Smart Decisions',
+    'advantages.smart.desc': 'Compare options, track deadlines, and plan your future with confidence.',
     
     // How It Works
     'how.title': 'How It Works',
     'how.step1.title': 'Choose Your Path',
-    'how.step1.desc': 'Select your desired country and degree level',
+    'how.step1.desc': 'Select your country & degree level',
     'how.step2.title': 'See Your Matches',
-    'how.step2.desc': 'Get personalized university and scholarship recommendations',
+    'how.step2.desc': 'Get personalized recommendations',
     'how.step3.title': 'Apply or Get Help',
-    'how.step3.desc': 'Apply yourself or connect with expert consultants',
+    'how.step3.desc': 'Apply yourself or connect with support',
     
-    // Dual Pathway
-    'pathway.diy.title': 'Apply Yourself',
-    'pathway.diy.desc': 'Search, compare, and apply directly to universities',
-    'pathway.diy.cta': 'Start Searching',
-    'pathway.consulting.title': 'Get Expert Help',
-    'pathway.consulting.desc': 'Free consultation with trusted education agencies',
-    'pathway.consulting.cta': 'Book Consultation',
+    // Universities Section
+    'universities.title': 'Explore Top Universities',
+    'universities.subtitle': 'Browse programs from verified institutions worldwide',
+    'universities.viewAll': 'View All Programs',
     
-    // Scholarships & Careers
+    // Scholarships Section
     'scholarships.title': 'Unlock 5,000+ Scholarships',
-    'scholarships.desc': 'Discover funding opportunities tailored to your profile',
-    'scholarships.cta': 'Browse Scholarships',
-    'careers.title': 'See What Your Degree is Worth',
-    'careers.desc': 'Explore real salaries and career pathways for your field',
-    'careers.cta': 'Explore Careers',
+    'scholarships.subtitle': 'Discover funding opportunities tailored to your profile',
+    'scholarships.viewAll': 'Browse All Scholarships',
     
-    // Highlights
-    'highlight.verified.title': 'Verified Universities',
-    'highlight.verified.desc': 'All partner universities are thoroughly vetted and accredited',
-    'highlight.scholarships.title': 'Scholarships Available',
-    'highlight.scholarships.desc': 'Access thousands of funding opportunities worldwide',
-    'highlight.trusted.title': 'Trusted by Students',
-    'highlight.trusted.desc': 'Join 10,000+ students who found their perfect match',
-    'highlight.easy.title': 'Apply in 3 Steps',
-    'highlight.easy.desc': 'Simple application process with expert guidance',
+    // Careers Section
+    'careers.title': 'Explore Career Pathways',
+    'careers.subtitle': 'See what your degree is worth in real salaries',
+    'careers.viewAll': 'Explore All Careers',
     
-    // CTA
-    'cta.sticky': 'Find My Dream University',
+    // Trust & Social Proof
+    'testimonial.quote': 'StudyPath helped me find the perfect university with a full scholarship. The process was smooth and the support was amazing!',
+    'testimonial.name': 'Aziza Karimova',
+    'testimonial.location': 'Tashkent → Toronto',
+    
+    // Trusted Partners
+    'partners.title': 'Our Trusted Partners',
+    'partners.verified': 'Verified Partner',
+    
+    // Mid-Page CTA
+    'midCta.title': 'Ready to Start Your Journey?',
+    'midCta.button': 'Find My Dream University',
+    
+    // Footer
+    'footer.about': 'About',
+    'footer.contact': 'Contact',
+    'footer.blog': 'Blog',
+    'footer.faq': 'FAQ',
+    'footer.privacy': 'Privacy Policy',
+    'footer.terms': 'Terms',
+    'footer.copyright': '© 2025 StudyPath. All rights reserved.',
+    'footer.tagline': 'Find your perfect university abroad — Simple, Fast, Trusted.',
     
     // Countries
     'country.usa': 'United States',
@@ -89,68 +109,88 @@ const translations = {
   },
   uz: {
     // Navbar
+    'nav.findPrograms': 'Dasturlarni Toping',
     'nav.universities': 'Universitetlar',
-    'nav.programs': 'Dasturlar',
-    'nav.about': 'Biz haqimizda',
-    'nav.support': 'Yordam',
+    'nav.scholarships': 'Grantlar',
+    'nav.careers': 'Martabalar',
+    'nav.getSupport': 'Yordam Oling',
+    'nav.faq': 'Savollar',
     'nav.login': 'Kirish',
-    'nav.register': "Ro'yxatdan o'tish",
+    'nav.register': "Ro'yxatdan O'tish",
+    'nav.stickyCta': 'Orzuimdagi Universitetni Topish',
     
-    // Homepage Hero
+    // Hero Section
     'hero.title': 'Orzuingizdagi Universitet va Grantni Toping',
-    'hero.subtitle': "Toshkentdan Torontogacha — o'z xorijda ta'lim olish orzusini haqiqatga aylantirgan minglab talabalarga qo'shiling.",
-    'hero.search.placeholder': 'Universitet, dastur yoki davlat bo\'yicha qidirish',
-    'hero.filter.destination': 'Davlat',
-    'hero.filter.degree': 'Daraja',
-    'hero.filter.field': "Ta'lim yo'nalishi",
-    'hero.filter.intake': 'Qabul sanasi',
-    'hero.cta': 'Eng Yaxshi Mosliklarni Ko\'ring',
+    'hero.subtitle': "Toshkentdan Torontogacha — minglab talabalar kabi siz ham orzuingizdagi ta'limni amalga oshiring.",
+    'hero.country.placeholder': 'Davlatni Tanlang',
+    'hero.degree.placeholder': 'Daraja Darajasini Tanlang',
+    'hero.cta': "Eng Yaxshi Mos Keladigan Variantlarni Ko'rish",
     
     // Trust Stats
-    'stats.students': "50,000+ Talabaga Yo'l Ko'rsatildi",
-    'stats.success': "95% Muvaffaqiyat Ko'rsatkichi",
-    'stats.scholarships': '5,000+ Grant',
+    'stats.students': "50K+ talabaga yo'l ko'rsatildi",
+    'stats.success': "95% muvaffaqiyat ko'rsatkichi",
+    'stats.scholarships': '5,000+ grant',
+    
+    // Advantages Section
+    'advantages.title': "Nega Talabalar StudyPath'ni Tanlaydi",
+    'advantages.personalized.title': 'Shaxsiy Mosliklar',
+    'advantages.personalized.desc': "Profilingizga moslashtirilgan universitetlar va grantlarni oling.",
+    'advantages.trusted.title': 'Ishonchli Yordam',
+    'advantages.trusted.desc': "Tasdiqlangan hamkorlar va dasturlarga ishonishingiz mumkin.",
+    'advantages.save.title': 'Vaqt va Kuchni Tejang',
+    'advantages.save.desc': "Dasturlar, grantlar va martaba bo'yicha yo'l-yo'riq uchun bitta platforma.",
+    'advantages.smart.title': 'Aqlli Qarorlar',
+    'advantages.smart.desc': "Variantlarni solishtiring, muddatlarni kuzating va kelajagingizni ishonch bilan rejalang.",
     
     // How It Works
     'how.title': 'Qanday Ishlaydi',
     'how.step1.title': "Yo'lingizni Tanlang",
-    'how.step1.desc': 'Istagan davlat va ta\'lim darajasini tanlang',
-    'how.step2.title': 'Mosliklaringizni Ko\'ring',
-    'how.step2.desc': 'Shaxsiy universitet va grant tavsiyalarini oling',
+    'how.step1.desc': 'Davlat va daraja darajasini tanlang',
+    'how.step2.title': "Mosliklaringizni Ko'ring",
+    'how.step2.desc': 'Shaxsiy tavsiyalarni oling',
     'how.step3.title': 'Ariza Yuboring yoki Yordam Oling',
-    'how.step3.desc': "O'zingiz ariza yuboring yoki mutaxassis maslahatchilar bilan bog'laning",
+    'how.step3.desc': "O'zingiz ariza yuboring yoki yordam bilan bog'laning",
     
-    // Dual Pathway
-    'pathway.diy.title': "O'zingiz Ariza Yuboring",
-    'pathway.diy.desc': "Qidiring, solishtiring va universitetlarga to'g'ridan-to'g'ri ariza yuboring",
-    'pathway.diy.cta': 'Qidirishni Boshlang',
-    'pathway.consulting.title': 'Mutaxassis Yordamini Oling',
-    'pathway.consulting.desc': "Ishonchli ta'lim agentliklari bilan bepul maslahat",
-    'pathway.consulting.cta': "Maslahat Buyurtma Qiling",
+    // Universities Section
+    'universities.title': 'Eng Yaxshi Universitetlarni Kashf Eting',
+    'universities.subtitle': "Butun dunyo bo'ylab tasdiqlangan muassasalarning dasturlarini ko'ring",
+    'universities.viewAll': "Barcha Dasturlarni Ko'rish",
     
-    // Scholarships & Careers
+    // Scholarships Section
     'scholarships.title': '5,000+ Grantni Oching',
-    'scholarships.desc': "Profilingizga moslashtirilgan moliyaviy imkoniyatlarni kashf eting",
-    'scholarships.cta': 'Grantlarni Ko\'ring',
-    'careers.title': "Diplomingiz Qancha Turadi",
-    'careers.desc': "Yo'nalishingizdagi haqiqiy ish haqi va martaba yo'llarini o'rganing",
-    'careers.cta': "Martabalarni O'rganing",
+    'scholarships.subtitle': "Profilingizga moslashtirilgan moliyaviy imkoniyatlarni kashf eting",
+    'scholarships.viewAll': "Barcha Grantlarni Ko'rish",
     
-    // Highlights
-    'highlight.verified.title': 'Tasdiqlangan Universitetlar',
-    'highlight.verified.desc': "Barcha hamkor universitetlar to'liq tekshirilgan va akkreditatsiyalangan",
-    'highlight.scholarships.title': 'Grantlar Mavjud',
-    'highlight.scholarships.desc': "Butun dunyo bo'ylab minglab moliyaviy imkoniyatlarga kirish",
-    'highlight.trusted.title': 'Talabalar Ishonadi',
-    'highlight.trusted.desc': "10,000+ talaba o'z mukammal mosligini topdi",
-    'highlight.easy.title': '3 Bosqichda Ariza',
-    'highlight.easy.desc': "Mutaxassis yo'l-yo'riq bilan oddiy ariza jarayoni",
+    // Careers Section
+    'careers.title': "Martaba Yo'llarini O'rganing",
+    'careers.subtitle': "Diplomingiz haqiqiy ish haqida qancha turadi",
+    'careers.viewAll': "Barcha Martabalarni O'rganing",
     
-    // CTA
-    'cta.sticky': 'Orzuimdagi Universitetni Topish',
+    // Trust & Social Proof
+    'testimonial.quote': "StudyPath menga to'liq grant bilan mukammal universitetni topishga yordam berdi. Jarayon silliq va yordam ajoyib edi!",
+    'testimonial.name': 'Aziza Karimova',
+    'testimonial.location': 'Toshkent → Toronto',
+    
+    // Trusted Partners
+    'partners.title': 'Bizning Ishonchli Hamkorlarimiz',
+    'partners.verified': 'Tasdiqlangan Hamkor',
+    
+    // Mid-Page CTA
+    'midCta.title': 'Safaringizni Boshlashga Tayyor Misiz?',
+    'midCta.button': 'Orzuimdagi Universitetni Topish',
+    
+    // Footer
+    'footer.about': 'Biz haqimizda',
+    'footer.contact': 'Aloqa',
+    'footer.blog': 'Blog',
+    'footer.faq': 'Savollar',
+    'footer.privacy': 'Maxfiylik Siyosati',
+    'footer.terms': 'Shartlar',
+    'footer.copyright': '© 2025 StudyPath. Barcha huquqlar himoyalangan.',
+    'footer.tagline': "Xorijdagi mukammal universitetingizni toping — Oddiy, Tez, Ishonchli.",
     
     // Countries
-    'country.usa': 'Amerika Qo\'shma Shtatlari',
+    'country.usa': "Amerika Qo'shma Shtatlari",
     'country.uk': 'Buyuk Britaniya',
     'country.canada': 'Kanada',
     'country.australia': 'Avstraliya',
@@ -165,65 +205,85 @@ const translations = {
   },
   ru: {
     // Navbar
+    'nav.findPrograms': 'Найти Программы',
     'nav.universities': 'Университеты',
-    'nav.programs': 'Программы',
-    'nav.about': 'О нас',
-    'nav.support': 'Поддержка',
+    'nav.scholarships': 'Стипендии',
+    'nav.careers': 'Карьера',
+    'nav.getSupport': 'Получить Поддержку',
+    'nav.faq': 'Вопросы',
     'nav.login': 'Войти',
     'nav.register': 'Регистрация',
+    'nav.stickyCta': 'Найти Университет Мечты',
     
-    // Homepage Hero
-    'hero.title': 'Найдите Университет и Стипендию Вашей Мечты',
-    'hero.subtitle': 'От Ташкента до Торонто — присоединяйтесь к тысячам студентов, воплотивших свою мечту об учебе за рубежом.',
-    'hero.search.placeholder': 'Поиск по университету, программе или стране',
-    'hero.filter.destination': 'Страна',
-    'hero.filter.degree': 'Степень',
-    'hero.filter.field': 'Область обучения',
-    'hero.filter.intake': 'Дата поступления',
-    'hero.cta': 'Показать Лучшие Совпадения',
+    // Hero Section
+    'hero.title': 'Найдите Университет и Стипендию Своей Мечты',
+    'hero.subtitle': 'От Ташкента до Торонто — присоединяйтесь к тысячам студентов, которые осуществили мечту об учебе за рубежом.',
+    'hero.country.placeholder': 'Выберите Страну',
+    'hero.degree.placeholder': 'Выберите Уровень Образования',
+    'hero.cta': 'Посмотреть Лучшие Совпадения',
     
     // Trust Stats
-    'stats.students': '50,000+ Студентов',
-    'stats.success': '95% Успешности',
-    'stats.scholarships': '5,000+ Стипендий',
+    'stats.students': '50K+ студентов',
+    'stats.success': '95% успешности',
+    'stats.scholarships': '5,000+ стипендий',
+    
+    // Advantages Section
+    'advantages.title': 'Почему Студенты Выбирают StudyPath',
+    'advantages.personalized.title': 'Персональный Подбор',
+    'advantages.personalized.desc': 'Получите университеты и стипендии, адаптированные под ваш профиль.',
+    'advantages.trusted.title': 'Надежная Поддержка',
+    'advantages.trusted.desc': 'Проверенные партнеры и программы, на которые можно положиться.',
+    'advantages.save.title': 'Экономия Времени и Усилий',
+    'advantages.save.desc': 'Одна платформа для программ, стипендий и карьерного консультирования.',
+    'advantages.smart.title': 'Умные Решения',
+    'advantages.smart.desc': 'Сравнивайте варианты, отслеживайте сроки и планируйте будущее с уверенностью.',
     
     // How It Works
     'how.title': 'Как Это Работает',
     'how.step1.title': 'Выберите Путь',
-    'how.step1.desc': 'Выберите желаемую страну и степень образования',
+    'how.step1.desc': 'Выберите страну и уровень образования',
     'how.step2.title': 'Смотрите Совпадения',
-    'how.step2.desc': 'Получите персональные рекомендации университетов и стипендий',
+    'how.step2.desc': 'Получите персональные рекомендации',
     'how.step3.title': 'Подайте Заявку или Получите Помощь',
-    'how.step3.desc': 'Подайте заявку самостоятельно или свяжитесь с экспертами-консультантами',
+    'how.step3.desc': 'Подайте сами или свяжитесь с поддержкой',
     
-    // Dual Pathway
-    'pathway.diy.title': 'Подайте Сами',
-    'pathway.diy.desc': 'Ищите, сравнивайте и подавайте заявки напрямую в университеты',
-    'pathway.diy.cta': 'Начать Поиск',
-    'pathway.consulting.title': 'Получите Помощь Эксперта',
-    'pathway.consulting.desc': 'Бесплатная консультация с проверенными образовательными агентствами',
-    'pathway.consulting.cta': 'Записаться на Консультацию',
+    // Universities Section
+    'universities.title': 'Исследуйте Лучшие Университеты',
+    'universities.subtitle': 'Просматривайте программы проверенных учреждений по всему миру',
+    'universities.viewAll': 'Посмотреть Все Программы',
     
-    // Scholarships & Careers
+    // Scholarships Section
     'scholarships.title': 'Откройте 5,000+ Стипендий',
-    'scholarships.desc': 'Находите возможности финансирования, адаптированные под ваш профиль',
-    'scholarships.cta': 'Просмотреть Стипендии',
-    'careers.title': 'Узнайте Стоимость Вашей Степени',
-    'careers.desc': 'Изучите реальные зарплаты и карьерные пути в вашей области',
-    'careers.cta': 'Изучить Карьеры',
+    'scholarships.subtitle': 'Находите возможности финансирования, адаптированные под ваш профиль',
+    'scholarships.viewAll': 'Просмотреть Все Стипендии',
     
-    // Highlights
-    'highlight.verified.title': 'Проверенные Университеты',
-    'highlight.verified.desc': 'Все университеты-партнеры тщательно проверены и аккредитованы',
-    'highlight.scholarships.title': 'Доступные Стипендии',
-    'highlight.scholarships.desc': 'Доступ к тысячам возможностей финансирования по всему миру',
-    'highlight.trusted.title': 'Доверие Студентов',
-    'highlight.trusted.desc': '10,000+ студентов нашли идеальный вариант',
-    'highlight.easy.title': 'Подайте За 3 Шага',
-    'highlight.easy.desc': 'Простой процесс подачи заявки с экспертным руководством',
+    // Careers Section
+    'careers.title': 'Исследуйте Карьерные Пути',
+    'careers.subtitle': 'Узнайте реальную стоимость вашей степени',
+    'careers.viewAll': 'Исследовать Все Карьеры',
     
-    // CTA
-    'cta.sticky': 'Найти Университет Мечты',
+    // Trust & Social Proof
+    'testimonial.quote': 'StudyPath помог мне найти идеальный университет с полной стипендией. Процесс был плавным, а поддержка — потрясающей!',
+    'testimonial.name': 'Азиза Каримова',
+    'testimonial.location': 'Ташкент → Торонто',
+    
+    // Trusted Partners
+    'partners.title': 'Наши Надежные Партнеры',
+    'partners.verified': 'Проверенный Партнер',
+    
+    // Mid-Page CTA
+    'midCta.title': 'Готовы Начать Свое Путешествие?',
+    'midCta.button': 'Найти Университет Мечты',
+    
+    // Footer
+    'footer.about': 'О нас',
+    'footer.contact': 'Контакты',
+    'footer.blog': 'Блог',
+    'footer.faq': 'Вопросы',
+    'footer.privacy': 'Политика Конфиденциальности',
+    'footer.terms': 'Условия',
+    'footer.copyright': '© 2025 StudyPath. Все права защищены.',
+    'footer.tagline': 'Найдите свой идеальный университет за рубежом — Просто, Быстро, Надежно.',
     
     // Countries
     'country.usa': 'Соединенные Штаты',
