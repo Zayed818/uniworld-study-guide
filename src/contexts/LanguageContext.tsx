@@ -24,11 +24,13 @@ const translations = {
     'nav.stickyCta': 'Find My Dream University',
     
     // Hero Section
-    'hero.title': 'Find Your Dream University and Scholarship',
-    'hero.subtitle': 'From Tashkent to Toronto — join thousands of students who turned their study abroad dream into reality.',
-    'hero.country.placeholder': 'Select Country',
-    'hero.degree.placeholder': 'Choose Degree Level',
+    'hero.title': 'Find Your Perfect Study Program',
+    'hero.subtitle': 'Match with programs tailored to your goals and qualifications.',
+    'hero.country.placeholder': 'Select Country *',
+    'hero.degree.placeholder': 'Choose Degree Level *',
+    'hero.field.placeholder': 'Select Field of Study *',
     'hero.cta': 'See My Best Matches',
+    'hero.loading': 'Finding matches...',
     
     // Trust Stats
     'stats.students': '50K+ students guided',

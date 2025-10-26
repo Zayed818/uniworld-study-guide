@@ -80,22 +80,6 @@ const Index = () => {
         
         <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto space-y-8">
-            {/* Trust Stats */}
-            <div className="flex flex-wrap justify-center gap-6 mb-6">
-              <div className="text-center">
-                <div className="text-2xl font-bold">🎓</div>
-                <div className="text-sm font-semibold">{t('stats.students')}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold">🌍</div>
-                <div className="text-sm font-semibold">{t('stats.success')}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold">💰</div>
-                <div className="text-sm font-semibold">{t('stats.scholarships')}</div>
-              </div>
-            </div>
-
             <div className="text-center space-y-4">
               <h1 className="text-4xl md:text-6xl font-bold leading-tight">
                 {t('hero.title')}
@@ -105,20 +89,18 @@ const Index = () => {
               </p>
             </div>
             
-            {/* Simplified Search Form */}
+            {/* Hero Form */}
             <div className="bg-white rounded-2xl p-6 md:p-8 shadow-2xl">
               <div className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <Select value={country} onValueChange={setCountry}>
                     <SelectTrigger className="h-14 bg-background text-foreground">
                       <SelectValue placeholder={t('hero.country.placeholder')} />
                     </SelectTrigger>
                     <SelectContent className="bg-popover z-50">
-                      <SelectItem value="usa">{t('country.usa')}</SelectItem>
-                      <SelectItem value="uk">{t('country.uk')}</SelectItem>
-                      <SelectItem value="canada">{t('country.canada')}</SelectItem>
-                      <SelectItem value="australia">{t('country.australia')}</SelectItem>
                       <SelectItem value="germany">{t('country.germany')}</SelectItem>
+                      <SelectItem value="uae">{t('country.uae')}</SelectItem>
+                      <SelectItem value="malaysia">{t('country.malaysia')}</SelectItem>
                     </SelectContent>
                   </Select>
 
@@ -127,22 +109,22 @@ const Index = () => {
                       <SelectValue placeholder={t('hero.degree.placeholder')} />
                     </SelectTrigger>
                     <SelectContent className="bg-popover z-50">
-                      <SelectItem value="certificate">{t('degree.certificate')}</SelectItem>
                       <SelectItem value="diploma">{t('degree.diploma')}</SelectItem>
                       <SelectItem value="bachelor">{t('degree.bachelor')}</SelectItem>
                       <SelectItem value="master">{t('degree.master')}</SelectItem>
                       <SelectItem value="phd">{t('degree.phd')}</SelectItem>
                     </SelectContent>
                   </Select>
-                </div>
 
-                <Button 
-                  size="lg" 
-                  className="w-full h-14 bg-gradient-accent hover:opacity-90 text-base font-semibold"
-                  asChild
-                >
-                  <Link to="/universities">{t('hero.cta')}</Link>
-                </Button>
+                  <Link to="/ai-matcher" className="h-14">
+                    <Button 
+                      size="lg" 
+                      className="w-full h-full bg-gradient-accent hover:opacity-90 text-base font-semibold"
+                    >
+                      {t('hero.cta')}
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
