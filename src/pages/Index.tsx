@@ -18,45 +18,16 @@ import {
   Award,
   Briefcase,
   CheckCircle2,
-  ArrowRight,
-  Loader2,
-  AlertCircle
+  ArrowRight
 } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Link, useNavigate } from "react-router-dom";
-import { useFieldTaxonomy } from "@/hooks/useFieldTaxonomy";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const { t } = useLanguage();
-  const navigate = useNavigate();
-  const { getFieldOptions, loading: fieldsLoading } = useFieldTaxonomy();
-  
   const [country, setCountry] = useState("");
   const [degreeLevel, setDegreeLevel] = useState("");
-  const [field, setField] = useState("");
-  const [showError, setShowError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const isFormValid = country && degreeLevel && field;
-  const fieldOptions = getFieldOptions();
-
-  const handleSubmit = () => {
-    if (!isFormValid) {
-      setShowError(true);
-      return;
-    }
-    
-    setIsLoading(true);
-    setShowError(false);
-    
-    // Navigate to AI Matcher with params
-    setTimeout(() => {
-      navigate('/ai-matcher', { 
-        state: { country, degreeLevel, field }
-      });
-    }, 800);
-  };
 
   const advantages = [
     {
@@ -104,137 +75,57 @@ const Index = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-hero text-white py-16 md:py-24 lg:py-32">
+      <section className="relative overflow-hidden bg-gradient-hero text-white py-20 md:py-32">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLW9wYWNpdHk9IjAuMSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
         
         <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto space-y-8">
-            {/* Headline and Subtext */}
-            <div className="text-center md:text-left space-y-4">
-              <h1 className="text-[28px] sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            <div className="text-center space-y-4">
+              <h1 className="text-4xl md:text-6xl font-bold leading-tight">
                 {t('hero.title')}
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-[80%] mx-auto md:mx-0 md:max-w-2xl">
+              <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
                 {t('hero.subtitle')}
               </p>
             </div>
             
             {/* Hero Form */}
             <div className="bg-white rounded-2xl p-6 md:p-8 shadow-2xl">
-              <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="space-y-4">
+              <div className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {/* Country Select */}
-                  <div className="space-y-2">
-                    <label htmlFor="country" className="text-sm font-medium text-foreground sr-only">
-                      Country
-                    </label>
-                    <Select 
-                      value={country} 
-                      onValueChange={(value) => {
-                        setCountry(value);
-                        setShowError(false);
-                      }}
-                    >
-                      <SelectTrigger 
-                        id="country"
-                        className="h-12 md:h-14 bg-background text-foreground touch-manipulation"
-                        aria-label="Select country"
-                      >
-                        <SelectValue placeholder={t('hero.country.placeholder')} />
-                      </SelectTrigger>
-                      <SelectContent className="bg-popover z-50">
-                        <SelectItem value="germany">🇩🇪 {t('country.germany')}</SelectItem>
-                        <SelectItem value="uae">🇦🇪 {t('country.uae')}</SelectItem>
-                        <SelectItem value="malaysia">🇲🇾 {t('country.malaysia')}</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  <Select value={country} onValueChange={setCountry}>
+                    <SelectTrigger className="h-14 bg-background text-foreground">
+                      <SelectValue placeholder={t('hero.country.placeholder')} />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover z-50">
+                      <SelectItem value="germany">{t('country.germany')}</SelectItem>
+                      <SelectItem value="uae">{t('country.uae')}</SelectItem>
+                      <SelectItem value="malaysia">{t('country.malaysia')}</SelectItem>
+                    </SelectContent>
+                  </Select>
 
-                  {/* Degree Level Select */}
-                  <div className="space-y-2">
-                    <label htmlFor="degree" className="text-sm font-medium text-foreground sr-only">
-                      Degree Level
-                    </label>
-                    <Select 
-                      value={degreeLevel} 
-                      onValueChange={(value) => {
-                        setDegreeLevel(value);
-                        setShowError(false);
-                      }}
-                    >
-                      <SelectTrigger 
-                        id="degree"
-                        className="h-12 md:h-14 bg-background text-foreground touch-manipulation"
-                        aria-label="Select degree level"
-                      >
-                        <SelectValue placeholder={t('hero.degree.placeholder')} />
-                      </SelectTrigger>
-                      <SelectContent className="bg-popover z-50">
-                        <SelectItem value="diploma">{t('degree.diploma')}</SelectItem>
-                        <SelectItem value="bachelor">{t('degree.bachelor')}</SelectItem>
-                        <SelectItem value="master">{t('degree.master')}</SelectItem>
-                        <SelectItem value="phd">{t('degree.phd')}</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  <Select value={degreeLevel} onValueChange={setDegreeLevel}>
+                    <SelectTrigger className="h-14 bg-background text-foreground">
+                      <SelectValue placeholder={t('hero.degree.placeholder')} />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover z-50">
+                      <SelectItem value="diploma">{t('degree.diploma')}</SelectItem>
+                      <SelectItem value="bachelor">{t('degree.bachelor')}</SelectItem>
+                      <SelectItem value="master">{t('degree.master')}</SelectItem>
+                      <SelectItem value="phd">{t('degree.phd')}</SelectItem>
+                    </SelectContent>
+                  </Select>
 
-                  {/* Field of Study Select */}
-                  <div className="space-y-2">
-                    <label htmlFor="field" className="text-sm font-medium text-foreground sr-only">
-                      Field of Study
-                    </label>
-                    <Select 
-                      value={field} 
-                      onValueChange={(value) => {
-                        setField(value);
-                        setShowError(false);
-                      }}
-                      disabled={fieldsLoading}
+                  <Link to="/ai-matcher" className="h-14">
+                    <Button 
+                      size="lg" 
+                      className="w-full h-full bg-gradient-accent hover:opacity-90 text-base font-semibold"
                     >
-                      <SelectTrigger 
-                        id="field"
-                        className="h-12 md:h-14 bg-background text-foreground touch-manipulation"
-                        aria-label="Select field of study"
-                      >
-                        <SelectValue placeholder={t('hero.field.placeholder')} />
-                      </SelectTrigger>
-                      <SelectContent className="bg-popover z-50 max-h-[300px]">
-                        {fieldOptions.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
+                      {t('hero.cta')}
+                    </Button>
+                  </Link>
                 </div>
-
-                {/* Error Message */}
-                {showError && !isFormValid && (
-                  <div className="flex items-center gap-2 text-destructive text-sm bg-destructive/10 p-3 rounded-lg" role="alert">
-                    <AlertCircle className="h-4 w-4 flex-shrink-0" />
-                    <span>Please complete all fields.</span>
-                  </div>
-                )}
-
-                {/* CTA Button */}
-                <Button 
-                  type="submit"
-                  size="lg" 
-                  disabled={!isFormValid || isLoading}
-                  className="w-full h-12 md:h-14 bg-gradient-accent hover:opacity-90 text-base font-semibold touch-manipulation disabled:opacity-50 disabled:cursor-not-allowed"
-                  aria-label="See my best matches"
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                      Finding programs for you…
-                    </>
-                  ) : (
-                    t('hero.cta')
-                  )}
-                </Button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
