@@ -36,10 +36,18 @@ export function useFieldTaxonomy() {
             },
           }
         );
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
-        setFields(data.fields);
+        if (data.fields && Array.isArray(data.fields)) {
+          setFields(data.fields);
+        }
       } catch (error) {
         console.error('Error fetching fields:', error);
+        setFields([]);
       } finally {
         setLoading(false);
       }

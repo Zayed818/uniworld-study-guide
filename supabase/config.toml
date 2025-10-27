@@ -1,1 +1,10 @@
 project_id = "gwokealdxjshyxfhbpio"
+
+[functions.get-fields]
+verify_jwt = false
+
+[functions.match-programs]
+verify_jwt = false
+
+[functions.get-program]
+verify_jwt = false
