@@ -129,7 +129,7 @@ serve(async (req) => {
 
   try {
     const url = new URL(req.url)
-    const id = url.pathname.split('/').pop()
+    const id = url.searchParams.get('id')
 
     const program = programs.find(p => p.id === id)
 
@@ -144,7 +144,7 @@ serve(async (req) => {
     }
 
     return new Response(
-      JSON.stringify(program),
+      JSON.stringify({ program }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 200 

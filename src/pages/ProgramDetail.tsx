@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -22,90 +23,123 @@ import {
 
 const ProgramDetail = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("overview");
+  const [loading, setLoading] = useState(true);
+  const [program, setProgram] = useState<any>(null);
 
-  // Mock program data - in real app, this would come from route params/API
-  const program = {
-    id: 1,
-    universityName: "Stanford University",
+  useEffect(() => {
+    const fetchProgram = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/get-program?id=${id}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error('Program not found');
+        }
+
+        const data = await response.json();
+        setProgram(data.program);
+      } catch (error) {
+        console.error('Error fetching program:', error);
+        toast({
+          title: "Error",
+          description: "Failed to load program details",
+          variant: "destructive",
+        });
+        navigate('/');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProgram();
+  }, [id, navigate, toast]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="container mx-auto px-4 py-8 text-center">
+          <p className="text-muted-foreground">Loading program details...</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (!program) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="container mx-auto px-4 py-8 text-center">
+          <p className="text-muted-foreground">Program not found</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Transform program data for display
+  const programData = {
+    id: program.id,
+    universityName: program.university,
     universityLogo: null,
-    country: "United States",
-    location: "California",
-    ranking: 1,
-    programTitle: "Master of Science in Computer Science",
-    degreeType: "Master's",
-    field: "Computer Science",
-    duration: "2 years",
-    tuition: "$27,100/year",
-    applicationFee: "$90",
-    intakeDates: ["Fall 2025", "Spring 2026"],
-    badges: ["Scholarship Available", "High Job Demand"],
+    country: program.country,
+    location: program.country,
+    ranking: program.ranking || 'N/A',
+    programTitle: program.name,
+    degreeType: program.degreeLevel,
+    field: program.field,
+    duration: program.duration || '2 years',
+    tuition: program.tuitionPerYear === 0 ? 'No Tuition' : `$${program.tuitionPerYear.toLocaleString()}/year`,
+    applicationFee: program.applicationFee || 'Contact university',
+    intakeDates: program.intakeDates || ['Rolling admissions'],
+    badges: [
+      ...(program.scholarshipAvailable ? ['Scholarship Available'] : []),
+      ...(program.tags || [])
+    ],
     overview: {
-      description: "Stanford's Master of Science in Computer Science program is one of the world's leading graduate programs. The program offers advanced coursework and research opportunities in areas including artificial intelligence, systems, theory, and human-computer interaction.",
-      outcomes: [
-        "Average starting salary: $150,000",
-        "95% employment rate within 3 months",
-        "Top employers: Google, Microsoft, Apple, Meta",
-        "Strong alumni network in Silicon Valley"
+      description: program.description || `${program.name} at ${program.university} offers comprehensive education in ${program.field}. The program prepares students for successful careers through rigorous coursework and practical experience.`,
+      outcomes: program.outcomes || [
+        "Strong career prospects in the field",
+        "Access to industry connections",
+        "Hands-on learning opportunities",
+        "Support for international students"
       ]
     },
     admissionRequirements: {
-      academic: [
-        "Bachelor's degree in Computer Science or related field",
-        "Minimum GPA of 3.5/4.0",
-        "Strong mathematical background"
+      academic: program.requirements?.academic || [
+        `Bachelor's degree in ${program.field} or related field`,
+        "Good academic standing",
+        "Relevant coursework or experience"
       ],
-      tests: [
-        "GRE: Minimum 320 (Verbal + Quantitative)",
-        "TOEFL: Minimum 100 (Internet-based) or IELTS: 7.0",
+      tests: program.requirements?.tests || [
+        "Language proficiency test (if applicable)",
+        "Standardized tests as required"
       ],
-      documents: [
+      documents: program.requirements?.documents || [
         "Official transcripts",
-        "Three letters of recommendation",
+        "Letters of recommendation",
         "Statement of Purpose",
-        "Resume/CV",
-        "Writing sample (optional)"
+        "Resume/CV"
       ]
     },
     fees: {
-      tuition: "$27,100 per year",
-      applicationFee: "$90",
-      livingExpenses: "$20,000 - $30,000 per year",
-      healthInsurance: "$6,000 per year",
-      scholarships: [
-        {
-          name: "Stanford Graduate Fellowship",
-          amount: "Full tuition + $40,000 stipend",
-          eligibility: "Outstanding academic merit"
-        },
-        {
-          name: "Diversity Scholarship",
-          amount: "$15,000",
-          eligibility: "Underrepresented minorities"
-        },
-        {
-          name: "International Student Scholarship",
-          amount: "$10,000",
-          eligibility: "International students with financial need"
-        }
-      ]
+      tuition: program.tuitionPerYear === 0 ? 'No Tuition' : `$${program.tuitionPerYear.toLocaleString()} per year`,
+      applicationFee: program.applicationFee || 'Contact university',
+      livingExpenses: program.livingExpenses || 'Varies by location',
+      healthInsurance: program.healthInsurance || 'Required',
+      scholarships: program.scholarships || []
     },
-    reviews: [
-      {
-        name: "Alisher K.",
-        country: "Uzbekistan",
-        rating: 5,
-        date: "March 2024",
-        comment: "Amazing program with world-class professors. The research opportunities are unparalleled."
-      },
-      {
-        name: "Maria S.",
-        country: "Russia",
-        rating: 5,
-        date: "February 2024",
-        comment: "Great career prospects and excellent support for international students."
-      }
-    ]
+    reviews: program.reviews || []
   };
 
   return (
@@ -129,29 +163,31 @@ const ProgramDetail = () => {
             {/* Header Section */}
             <Card className="border-2">
               <CardContent className="pt-6">
-                <div className="flex gap-4 mb-6">
+                  <div className="flex gap-4 mb-6">
                   <div className="w-20 h-20 bg-gradient-to-br from-primary to-primary-glow rounded-lg flex items-center justify-center shrink-0">
                     <GraduationCap className="h-10 w-10 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h1 className="text-3xl font-bold mb-2">{program.universityName}</h1>
+                    <h1 className="text-3xl font-bold mb-2">{programData.universityName}</h1>
                     <div className="flex flex-wrap items-center gap-3 text-muted-foreground">
                       <div className="flex items-center gap-1">
                         <MapPin className="h-4 w-4" />
-                        <span>{program.location}, {program.country}</span>
+                        <span>{programData.location}, {programData.country}</span>
                       </div>
-                      <Badge variant="outline">World Ranking: #{program.ranking}</Badge>
+                      {programData.ranking !== 'N/A' && (
+                        <Badge variant="outline">World Ranking: #{programData.ranking}</Badge>
+                      )}
                     </div>
                   </div>
                 </div>
 
                 {/* Program Overview */}
                 <div className="space-y-4">
-                  <h2 className="text-2xl font-bold">{program.programTitle}</h2>
+                  <h2 className="text-2xl font-bold">{programData.programTitle}</h2>
                   <div className="flex flex-wrap gap-2">
-                    <Badge className="text-sm">{program.degreeType}</Badge>
-                    <Badge variant="outline" className="text-sm">{program.field}</Badge>
-                    {program.badges.map((badge, idx) => (
+                    <Badge className="text-sm">{programData.degreeType}</Badge>
+                    <Badge variant="outline" className="text-sm">{programData.field}</Badge>
+                    {programData.badges.map((badge, idx) => (
                       <Badge 
                         key={idx}
                         variant="secondary"
@@ -171,21 +207,21 @@ const ProgramDetail = () => {
                         <Clock className="h-4 w-4" />
                         <span className="text-sm">Duration</span>
                       </div>
-                      <p className="font-semibold">{program.duration}</p>
+                      <p className="font-semibold">{programData.duration}</p>
                     </div>
                     <div>
                       <div className="flex items-center gap-2 text-muted-foreground mb-1">
                         <DollarSign className="h-4 w-4" />
                         <span className="text-sm">Tuition</span>
                       </div>
-                      <p className="font-semibold">{program.tuition}</p>
+                      <p className="font-semibold">{programData.tuition}</p>
                     </div>
                     <div>
                       <div className="flex items-center gap-2 text-muted-foreground mb-1">
                         <DollarSign className="h-4 w-4" />
                         <span className="text-sm">Application Fee</span>
                       </div>
-                      <p className="font-semibold">{program.applicationFee}</p>
+                      <p className="font-semibold">{programData.applicationFee}</p>
                     </div>
                     <div>
                       <div className="flex items-center gap-2 text-muted-foreground mb-1">
@@ -193,7 +229,7 @@ const ProgramDetail = () => {
                         <span className="text-sm">Intake Dates</span>
                       </div>
                       <div className="flex flex-wrap gap-1">
-                        {program.intakeDates.map((date, idx) => (
+                        {programData.intakeDates.map((date, idx) => (
                           <Badge key={idx} variant="outline" className="text-xs">
                             {date}
                           </Badge>
@@ -222,14 +258,14 @@ const ProgramDetail = () => {
                       Program Description
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
+                   <CardContent className="space-y-4">
                     <p className="text-muted-foreground leading-relaxed">
-                      {program.overview.description}
+                      {programData.overview.description}
                     </p>
                     <div>
                       <h4 className="font-semibold mb-3">Career Outcomes</h4>
                       <ul className="space-y-2">
-                        {program.overview.outcomes.map((outcome, idx) => (
+                        {programData.overview.outcomes.map((outcome, idx) => (
                           <li key={idx} className="flex items-start gap-2">
                             <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                             <span>{outcome}</span>
@@ -247,10 +283,10 @@ const ProgramDetail = () => {
                     <CardTitle>Admission Requirements</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
-                    <div>
+                     <div>
                       <h4 className="font-semibold mb-3">Academic Requirements</h4>
                       <ul className="space-y-2">
-                        {program.admissionRequirements.academic.map((req, idx) => (
+                        {programData.admissionRequirements.academic.map((req, idx) => (
                           <li key={idx} className="flex items-start gap-2">
                             <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                             <span>{req}</span>
@@ -261,7 +297,7 @@ const ProgramDetail = () => {
                     <div>
                       <h4 className="font-semibold mb-3">Test Requirements</h4>
                       <ul className="space-y-2">
-                        {program.admissionRequirements.tests.map((test, idx) => (
+                        {programData.admissionRequirements.tests.map((test, idx) => (
                           <li key={idx} className="flex items-start gap-2">
                             <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                             <span>{test}</span>
@@ -272,7 +308,7 @@ const ProgramDetail = () => {
                     <div>
                       <h4 className="font-semibold mb-3">Required Documents</h4>
                       <ul className="space-y-2">
-                        {program.admissionRequirements.documents.map((doc, idx) => (
+                        {programData.admissionRequirements.documents.map((doc, idx) => (
                           <li key={idx} className="flex items-start gap-2">
                             <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                             <span>{doc}</span>
@@ -290,22 +326,22 @@ const ProgramDetail = () => {
                     <CardTitle>Cost Breakdown</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="grid sm:grid-cols-2 gap-4">
+                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="p-4 border rounded-lg">
                         <p className="text-sm text-muted-foreground mb-1">Tuition</p>
-                        <p className="font-semibold text-lg">{program.fees.tuition}</p>
+                        <p className="font-semibold text-lg">{programData.fees.tuition}</p>
                       </div>
                       <div className="p-4 border rounded-lg">
                         <p className="text-sm text-muted-foreground mb-1">Application Fee</p>
-                        <p className="font-semibold text-lg">{program.fees.applicationFee}</p>
+                        <p className="font-semibold text-lg">{programData.fees.applicationFee}</p>
                       </div>
                       <div className="p-4 border rounded-lg">
                         <p className="text-sm text-muted-foreground mb-1">Living Expenses</p>
-                        <p className="font-semibold text-lg">{program.fees.livingExpenses}</p>
+                        <p className="font-semibold text-lg">{programData.fees.livingExpenses}</p>
                       </div>
                       <div className="p-4 border rounded-lg">
                         <p className="text-sm text-muted-foreground mb-1">Health Insurance</p>
-                        <p className="font-semibold text-lg">{program.fees.healthInsurance}</p>
+                        <p className="font-semibold text-lg">{programData.fees.healthInsurance}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -318,8 +354,9 @@ const ProgramDetail = () => {
                       Available Scholarships
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    {program.fees.scholarships.map((scholarship, idx) => (
+                   <CardContent className="space-y-4">
+                    {programData.fees.scholarships.length > 0 ? (
+                      programData.fees.scholarships.map((scholarship, idx) => (
                       <div key={idx} className="p-4 border rounded-lg space-y-2">
                         <div className="flex justify-between items-start">
                           <h4 className="font-semibold">{scholarship.name}</h4>
@@ -331,7 +368,10 @@ const ProgramDetail = () => {
                           Eligibility: {scholarship.eligibility}
                         </p>
                       </div>
-                    ))}
+                      ))
+                    ) : (
+                      <p className="text-muted-foreground">No scholarships currently available. Contact the university for more information.</p>
+                    )}
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -341,8 +381,9 @@ const ProgramDetail = () => {
                   <CardHeader>
                     <CardTitle>Student Reviews</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    {program.reviews.map((review, idx) => (
+                   <CardContent className="space-y-4">
+                    {programData.reviews.length > 0 ? (
+                      programData.reviews.map((review, idx) => (
                       <div key={idx} className="p-4 border rounded-lg space-y-2">
                         <div className="flex justify-between items-start">
                           <div>
@@ -358,7 +399,10 @@ const ProgramDetail = () => {
                         <p className="text-sm text-muted-foreground">{review.date}</p>
                         <p className="leading-relaxed">{review.comment}</p>
                       </div>
-                    ))}
+                      ))
+                    ) : (
+                      <p className="text-muted-foreground">No reviews yet. Be the first to review this program!</p>
+                    )}
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -372,23 +416,25 @@ const ProgramDetail = () => {
                 <CardTitle>Quick Facts</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="space-y-3 text-sm">
+                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Degree Type</span>
-                    <span className="font-semibold">{program.degreeType}</span>
+                    <span className="font-semibold">{programData.degreeType}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Duration</span>
-                    <span className="font-semibold">{program.duration}</span>
+                    <span className="font-semibold">{programData.duration}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Location</span>
-                    <span className="font-semibold">{program.location}</span>
+                    <span className="font-semibold">{programData.location}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Ranking</span>
-                    <span className="font-semibold">#{program.ranking}</span>
-                  </div>
+                  {programData.ranking !== 'N/A' && (
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Ranking</span>
+                      <span className="font-semibold">#{programData.ranking}</span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="pt-4 border-t space-y-2">

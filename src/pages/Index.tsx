@@ -120,9 +120,12 @@ const Index = () => {
             </div>
             
             {/* Hero Form */}
-            <div className="bg-white rounded-2xl p-6 md:p-8 shadow-2xl">
+            <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl">
+              <p className="text-sm text-muted-foreground mb-4 text-center md:text-left">
+                Start by selecting your country, degree level, and study field to see your best matches.
+              </p>
               <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
                   {/* Country Select */}
                   <div className="space-y-2">
                     <label htmlFor="country" className="text-sm font-medium text-foreground sr-only">
@@ -142,7 +145,7 @@ const Index = () => {
                       >
                         <SelectValue placeholder={t('hero.country.placeholder')} />
                       </SelectTrigger>
-                      <SelectContent className="bg-popover z-50">
+                      <SelectContent className="bg-background border shadow-lg z-[100]">
                         <SelectItem value="germany">🇩🇪 {t('country.germany')}</SelectItem>
                         <SelectItem value="uae">🇦🇪 {t('country.uae')}</SelectItem>
                         <SelectItem value="malaysia">🇲🇾 {t('country.malaysia')}</SelectItem>
@@ -169,7 +172,7 @@ const Index = () => {
                       >
                         <SelectValue placeholder={t('hero.degree.placeholder')} />
                       </SelectTrigger>
-                      <SelectContent className="bg-popover z-50">
+                      <SelectContent className="bg-background border shadow-lg z-[100]">
                         <SelectItem value="diploma">{t('degree.diploma')}</SelectItem>
                         <SelectItem value="bachelor">{t('degree.bachelor')}</SelectItem>
                         <SelectItem value="master">{t('degree.master')}</SelectItem>
@@ -198,7 +201,7 @@ const Index = () => {
                       >
                         <SelectValue placeholder={t('hero.field.placeholder')} />
                       </SelectTrigger>
-                      <SelectContent className="bg-popover z-50 max-h-[300px]">
+                      <SelectContent className="bg-background border shadow-lg z-[100] max-h-[300px]">
                         {fieldOptions.map((option) => (
                           <SelectItem key={option.value} value={option.value}>
                             {option.label}

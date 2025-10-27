@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -32,6 +33,7 @@ interface MatchResult {
 const AIMatcherNew = () => {
   const { t } = useLanguage();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const { getFieldOptions, getSubfieldOptions, loading: fieldsLoading } = useFieldTaxonomy();
   
   const [country, setCountry] = useState("");
@@ -127,7 +129,7 @@ const AIMatcherNew = () => {
                     <SelectTrigger className="bg-background">
                       <SelectValue placeholder={t('hero.country.placeholder')} />
                     </SelectTrigger>
-                    <SelectContent className="bg-popover z-50">
+                    <SelectContent className="bg-background border shadow-lg z-[100]">
                       <SelectItem value="germany">🇩🇪 Germany</SelectItem>
                       <SelectItem value="uae">🇦🇪 UAE</SelectItem>
                       <SelectItem value="malaysia">🇲🇾 Malaysia</SelectItem>
@@ -143,7 +145,7 @@ const AIMatcherNew = () => {
                     <SelectTrigger className="bg-background">
                       <SelectValue placeholder={t('hero.degree.placeholder')} />
                     </SelectTrigger>
-                    <SelectContent className="bg-popover z-50">
+                    <SelectContent className="bg-background border shadow-lg z-[100]">
                       <SelectItem value="diploma">{t('degree.diploma')}</SelectItem>
                       <SelectItem value="bachelor">{t('degree.bachelor')}</SelectItem>
                       <SelectItem value="master">{t('degree.master')}</SelectItem>
@@ -167,7 +169,7 @@ const AIMatcherNew = () => {
                     <SelectTrigger className="bg-background">
                       <SelectValue placeholder={t('hero.field.placeholder')} />
                     </SelectTrigger>
-                    <SelectContent className="bg-popover z-50 max-h-[300px]">
+                    <SelectContent className="bg-background border shadow-lg z-[100] max-h-[300px]">
                       {fieldOptions.map((option) => (
                         <SelectItem key={option.value} value={option.value}>
                           {option.label}
@@ -183,16 +185,16 @@ const AIMatcherNew = () => {
                       Specialization (Optional)
                     </label>
                     <Select value={subfield} onValueChange={setSubfield}>
-                      <SelectTrigger className="bg-background">
-                        <SelectValue placeholder="Select specialization" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-popover z-50 max-h-[300px]">
-                        {subfieldOptions.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
+                    <SelectTrigger className="bg-background">
+                      <SelectValue placeholder="Select specialization" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-background border shadow-lg z-[100] max-h-[300px]">
+                      {subfieldOptions.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
                     </Select>
                   </div>
                 )}
@@ -230,7 +232,18 @@ const AIMatcherNew = () => {
 
               <div className="grid gap-6">
                 {results.map((program) => (
-                  <Card key={program.id} className="hover:shadow-lg transition-shadow">
+                  <Card 
+                    key={program.id} 
+                    className="hover:shadow-lg transition-all cursor-pointer hover:border-primary/50"
+                    onClick={() => navigate(`/program/${program.id}`)}
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        navigate(`/program/${program.id}`);
+                      }
+                    }}
+                  >
                     <CardContent className="pt-6">
                       <div className="flex flex-col md:flex-row justify-between gap-4">
                         <div className="space-y-3 flex-1">
