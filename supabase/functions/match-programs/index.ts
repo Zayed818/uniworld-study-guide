@@ -7,7 +7,7 @@ const corsHeaders = {
 
 const programs = [
   {
-    id: 'tum-mech',
+    id: '1',
     name: 'BSc Mechanical Engineering',
     university: 'Technical University of Munich',
     country: 'germany',
@@ -23,7 +23,7 @@ const programs = [
     tags: ['Top University', 'No Tuition', 'Scholarship Available']
   },
   {
-    id: 'lmu-data',
+    id: '2',
     name: 'MSc Data Science',
     university: 'Ludwig Maximilian University of Munich',
     country: 'germany',
@@ -39,7 +39,7 @@ const programs = [
     tags: ['Top University', 'No Tuition', 'Research Focused']
   },
   {
-    id: 'aud-marketing',
+    id: '3',
     name: 'BBA Marketing',
     university: 'American University in Dubai',
     country: 'uae',
@@ -55,7 +55,7 @@ const programs = [
     tags: ['Business Hub', 'Internship Opportunities']
   },
   {
-    id: 'ku-civil',
+    id: '4',
     name: 'MSc Civil Engineering',
     university: 'Khalifa University',
     country: 'uae',
@@ -71,7 +71,7 @@ const programs = [
     tags: ['Fully Funded', 'Research Excellence']
   },
   {
-    id: 'um-data',
+    id: '5',
     name: 'MSc Data Science',
     university: 'University of Malaya',
     country: 'malaysia',
@@ -87,7 +87,7 @@ const programs = [
     tags: ['Affordable', 'Top Ranked in Asia']
   },
   {
-    id: 'upm-biotech',
+    id: '6',
     name: 'BSc Biotechnology',
     university: 'Universiti Putra Malaysia',
     country: 'malaysia',

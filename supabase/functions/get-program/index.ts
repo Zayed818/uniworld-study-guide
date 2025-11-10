@@ -7,7 +7,7 @@ const corsHeaders = {
 
 const programs = [
   {
-    id: 'tum-mech',
+    id: '1',
     name: 'BSc Mechanical Engineering',
     university: 'Technical University of Munich',
     country: 'germany',
@@ -26,7 +26,7 @@ const programs = [
     requirements: ['High school diploma', 'IELTS 6.5 or equivalent', 'Strong math and physics background']
   },
   {
-    id: 'lmu-data',
+    id: '2',
     name: 'MSc Data Science',
     university: 'Ludwig Maximilian University of Munich',
     country: 'germany',
@@ -45,7 +45,7 @@ const programs = [
     requirements: ['Bachelor in Computer Science or related field', 'IELTS 7.0 or equivalent', 'GPA 3.5+']
   },
   {
-    id: 'aud-marketing',
+    id: '3',
     name: 'BBA Marketing',
     university: 'American University in Dubai',
     country: 'uae',
@@ -64,7 +64,7 @@ const programs = [
     requirements: ['High school diploma', 'IELTS 6.0 or equivalent', 'GPA 3.0+']
   },
   {
-    id: 'ku-civil',
+    id: '4',
     name: 'MSc Civil Engineering',
     university: 'Khalifa University',
     country: 'uae',
@@ -83,7 +83,7 @@ const programs = [
     requirements: ['Bachelor in Civil Engineering', 'IELTS 6.5 or equivalent', 'GPA 3.3+']
   },
   {
-    id: 'um-data',
+    id: '5',
     name: 'MSc Data Science',
     university: 'University of Malaya',
     country: 'malaysia',
@@ -102,7 +102,7 @@ const programs = [
     requirements: ['Bachelor in Computer Science or related field', 'IELTS 6.0 or equivalent', 'GPA 3.0+']
   },
   {
-    id: 'upm-biotech',
+    id: '6',
     name: 'BSc Biotechnology',
     university: 'Universiti Putra Malaysia',
     country: 'malaysia',
