@@ -180,6 +180,41 @@ function calculateMatch(program: any, criteria: any) {
   }
 }
 
+// Input validation schema
+const validateCriteria = (data: any) => {
+  const errors: string[] = []
+  
+  if (!data.country || typeof data.country !== 'string' || data.country.length > 50) {
+    errors.push('Valid country is required')
+  }
+  
+  if (!data.degreeLevel || typeof data.degreeLevel !== 'string' || data.degreeLevel.length > 20) {
+    errors.push('Valid degree level is required')
+  }
+  
+  if (!data.field || typeof data.field !== 'string' || data.field.length > 50) {
+    errors.push('Valid field is required')
+  }
+  
+  if (data.subfield && (typeof data.subfield !== 'string' || data.subfield.length > 50)) {
+    errors.push('Invalid subfield format')
+  }
+  
+  if (data.budget && (typeof data.budget !== 'string' || !/^\d+$/.test(data.budget))) {
+    errors.push('Budget must be a numeric string')
+  }
+  
+  if (data.language && (typeof data.language !== 'string' || data.language.length > 20)) {
+    errors.push('Invalid language format')
+  }
+  
+  if (data.delivery && (typeof data.delivery !== 'string' || data.delivery.length > 20)) {
+    errors.push('Invalid delivery format')
+  }
+  
+  return errors
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
@@ -188,10 +223,11 @@ serve(async (req) => {
   try {
     const criteria = await req.json()
 
-    // Validate required fields
-    if (!criteria.country || !criteria.degreeLevel || !criteria.field) {
+    // Validate input
+    const validationErrors = validateCriteria(criteria)
+    if (validationErrors.length > 0) {
       return new Response(
-        JSON.stringify({ error: 'Country, degree level, and field are required' }),
+        JSON.stringify({ error: 'Invalid request parameters' }),
         { 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
           status: 400 
@@ -232,11 +268,12 @@ serve(async (req) => {
       }
     )
   } catch (error) {
+    console.error('Match programs error:', error)
     return new Response(
-      JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }),
+      JSON.stringify({ error: 'Failed to process request' }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 400 
+        status: 500 
       }
     )
   }

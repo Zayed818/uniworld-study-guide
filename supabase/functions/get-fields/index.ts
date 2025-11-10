@@ -132,11 +132,12 @@ serve(async (req) => {
       }
     )
   } catch (error) {
+    console.error('Get fields error:', error)
     return new Response(
-      JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }),
+      JSON.stringify({ error: 'Failed to retrieve fields' }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 400 
+        status: 500 
       }
     )
   }

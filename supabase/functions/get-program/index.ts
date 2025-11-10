@@ -130,6 +130,17 @@ serve(async (req) => {
   try {
     const url = new URL(req.url)
     const id = url.searchParams.get('id')
+    
+    // Validate id parameter
+    if (!id || typeof id !== 'string' || id.length > 20 || !/^[a-zA-Z0-9-_]+$/.test(id)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid program ID' }),
+        { 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 400 
+        }
+      )
+    }
 
     const program = programs.find(p => p.id === id)
 
@@ -151,11 +162,12 @@ serve(async (req) => {
       }
     )
   } catch (error) {
+    console.error('Get program error:', error)
     return new Response(
-      JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }),
+      JSON.stringify({ error: 'Failed to retrieve program' }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 400 
+        status: 500 
       }
     )
   }
