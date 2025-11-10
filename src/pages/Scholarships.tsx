@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -15,6 +16,7 @@ import {
 import { Search, Award, Calendar, MapPin, DollarSign } from "lucide-react";
 
 const Scholarships = () => {
+  const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
 
   const scholarships = [
@@ -96,9 +98,9 @@ const Scholarships = () => {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-accent rounded-full mb-4">
               <Award className="h-8 w-8 text-white" />
             </div>
-            <h1 className="text-4xl font-bold mb-2">Scholarship Hub</h1>
+            <h1 className="text-4xl font-bold mb-2">{t('scholarships.hub.title')}</h1>
             <p className="text-xl text-muted-foreground">
-              Discover funding opportunities to make your education abroad affordable
+              {t('scholarships.hub.subtitle')}
             </p>
           </div>
         </div>
@@ -111,7 +113,7 @@ const Scholarships = () => {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input
-                  placeholder="Search scholarships by name, country, or field..."
+                  placeholder={t('scholarships.search.placeholder')}
                   className="pl-10 h-12"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -190,7 +192,7 @@ const Scholarships = () => {
         {/* Results Count */}
         <div className="mb-6">
           <p className="text-muted-foreground">
-            Showing <span className="font-semibold text-foreground">{scholarships.length}</span> scholarships
+            {t('scholarships.showing')} <span className="font-semibold text-foreground">{scholarships.length}</span> {t('scholarships.scholarships')}
           </p>
         </div>
 
@@ -216,7 +218,7 @@ const Scholarships = () => {
                     <div className="flex items-start gap-2">
                       <MapPin className="h-4 w-4 text-accent shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-muted-foreground">Country</p>
+                        <p className="text-muted-foreground">{t('scholarships.filter.country')}</p>
                         <p className="font-semibold">{scholarship.country}</p>
                       </div>
                     </div>
@@ -224,7 +226,7 @@ const Scholarships = () => {
                     <div className="flex items-start gap-2">
                       <Award className="h-4 w-4 text-accent shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-muted-foreground">Degree Level</p>
+                        <p className="text-muted-foreground">{t('scholarships.degreeLevel')}</p>
                         <p className="font-semibold">{scholarship.degree}</p>
                       </div>
                     </div>
@@ -232,7 +234,7 @@ const Scholarships = () => {
                     <div className="flex items-start gap-2">
                       <DollarSign className="h-4 w-4 text-accent shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-muted-foreground">Amount</p>
+                        <p className="text-muted-foreground">{t('scholarships.amount')}</p>
                         <p className="font-semibold">{scholarship.amount}</p>
                       </div>
                     </div>
@@ -240,7 +242,7 @@ const Scholarships = () => {
                     <div className="flex items-start gap-2">
                       <Calendar className="h-4 w-4 text-accent shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-muted-foreground">Deadline</p>
+                        <p className="text-muted-foreground">{t('scholarships.deadline')}</p>
                         <p className="font-semibold">{scholarship.deadline}</p>
                       </div>
                     </div>
@@ -249,17 +251,17 @@ const Scholarships = () => {
                   {/* Field Badge */}
                   <div>
                     <Badge variant="outline">
-                      Field: {scholarship.field}
+                      {t('scholarships.field')}: {scholarship.field}
                     </Badge>
                   </div>
 
                   {/* Actions */}
                   <div className="flex flex-col sm:flex-row gap-3 pt-2">
                     <Button className="bg-gradient-accent flex-1">
-                      View Details
+                      {t('scholarships.viewDetails')}
                     </Button>
                     <Button variant="outline" className="flex-1">
-                      Get Help Applying
+                      {t('scholarships.getHelp')}
                     </Button>
                   </div>
                 </div>
@@ -271,7 +273,7 @@ const Scholarships = () => {
         {/* Load More */}
         <div className="mt-8 text-center">
           <Button variant="outline" size="lg">
-            Load More Scholarships
+            {t('scholarships.loadMore')}
           </Button>
         </div>
 
@@ -280,13 +282,12 @@ const Scholarships = () => {
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <Award className="h-12 w-12 text-accent mx-auto" />
-              <h3 className="text-2xl font-bold">Need Help Preparing Your Application?</h3>
+              <h3 className="text-2xl font-bold">{t('scholarships.needHelp')}</h3>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Connect with our verified agencies who specialize in scholarship applications. 
-                They can help you craft winning applications and increase your chances of success.
+                {t('scholarships.helpText')}
               </p>
               <Button size="lg" className="bg-gradient-accent">
-                Connect with an Agency
+                {t('scholarships.connectAgency')}
               </Button>
             </div>
           </CardContent>

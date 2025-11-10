@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -25,6 +26,7 @@ const ProgramDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState("overview");
   const [loading, setLoading] = useState(true);
   const [program, setProgram] = useState<any>(null);
@@ -50,8 +52,8 @@ const ProgramDetail = () => {
       } catch (error) {
         console.error('Error fetching program:', error);
         toast({
-          title: "Error",
-          description: "Failed to load program details",
+          title: t('program.notFound'),
+          description: t('program.notFound'),
           variant: "destructive",
         });
         navigate('/');
@@ -68,7 +70,7 @@ const ProgramDetail = () => {
       <div className="min-h-screen bg-background">
         <Navbar />
         <div className="container mx-auto px-4 py-8 text-center">
-          <p className="text-muted-foreground">Loading program details...</p>
+          <p className="text-muted-foreground">{t('program.loading')}</p>
         </div>
         <Footer />
       </div>
@@ -80,7 +82,7 @@ const ProgramDetail = () => {
       <div className="min-h-screen bg-background">
         <Navbar />
         <div className="container mx-auto px-4 py-8 text-center">
-          <p className="text-muted-foreground">Program not found</p>
+          <p className="text-muted-foreground">{t('program.notFound')}</p>
         </div>
         <Footer />
       </div>
@@ -154,7 +156,7 @@ const ProgramDetail = () => {
           onClick={() => navigate(-1)}
         >
           <ChevronLeft className="h-4 w-4 mr-1" />
-          Back to Search
+          {t('program.backToSearch')}
         </Button>
 
         <div className="grid lg:grid-cols-[1fr,350px] gap-8">
@@ -175,7 +177,7 @@ const ProgramDetail = () => {
                         <span>{programData.location}, {programData.country}</span>
                       </div>
                       {programData.ranking !== 'N/A' && (
-                        <Badge variant="outline">World Ranking: #{programData.ranking}</Badge>
+                        <Badge variant="outline">{t('program.worldRanking')}: #{programData.ranking}</Badge>
                       )}
                     </div>
                   </div>
@@ -205,28 +207,28 @@ const ProgramDetail = () => {
                     <div>
                       <div className="flex items-center gap-2 text-muted-foreground mb-1">
                         <Clock className="h-4 w-4" />
-                        <span className="text-sm">Duration</span>
+                        <span className="text-sm">{t('program.duration')}</span>
                       </div>
                       <p className="font-semibold">{programData.duration}</p>
                     </div>
                     <div>
                       <div className="flex items-center gap-2 text-muted-foreground mb-1">
                         <DollarSign className="h-4 w-4" />
-                        <span className="text-sm">Tuition</span>
+                        <span className="text-sm">{t('program.tuition')}</span>
                       </div>
                       <p className="font-semibold">{programData.tuition}</p>
                     </div>
                     <div>
                       <div className="flex items-center gap-2 text-muted-foreground mb-1">
                         <DollarSign className="h-4 w-4" />
-                        <span className="text-sm">Application Fee</span>
+                        <span className="text-sm">{t('program.appFee')}</span>
                       </div>
                       <p className="font-semibold">{programData.applicationFee}</p>
                     </div>
                     <div>
                       <div className="flex items-center gap-2 text-muted-foreground mb-1">
                         <Calendar className="h-4 w-4" />
-                        <span className="text-sm">Intake Dates</span>
+                        <span className="text-sm">{t('program.startDate')}</span>
                       </div>
                       <div className="flex flex-wrap gap-1">
                         {programData.intakeDates.map((date, idx) => (
@@ -244,10 +246,10 @@ const ProgramDetail = () => {
             {/* Tabs Section */}
             <Tabs value={activeTab} onValueChange={setActiveTab}>
               <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="requirements">Requirements</TabsTrigger>
-                <TabsTrigger value="fees">Fees & Scholarships</TabsTrigger>
-                <TabsTrigger value="reviews">Reviews</TabsTrigger>
+                <TabsTrigger value="overview">{t('program.overview')}</TabsTrigger>
+                <TabsTrigger value="requirements">{t('program.requirements')}</TabsTrigger>
+                <TabsTrigger value="fees">{t('program.fees')}</TabsTrigger>
+                <TabsTrigger value="reviews">{t('program.reviews')}</TabsTrigger>
               </TabsList>
 
               <TabsContent value="overview" className="space-y-4 mt-6">
@@ -255,7 +257,7 @@ const ProgramDetail = () => {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <BookOpen className="h-5 w-5" />
-                      Program Description
+                      {t('program.description')}
                     </CardTitle>
                   </CardHeader>
                    <CardContent className="space-y-4">
@@ -263,7 +265,7 @@ const ProgramDetail = () => {
                       {programData.overview.description}
                     </p>
                     <div>
-                      <h4 className="font-semibold mb-3">Career Outcomes</h4>
+                      <h4 className="font-semibold mb-3">{t('program.outcomes')}</h4>
                       <ul className="space-y-2">
                         {programData.overview.outcomes.map((outcome, idx) => (
                           <li key={idx} className="flex items-start gap-2">
@@ -280,11 +282,11 @@ const ProgramDetail = () => {
               <TabsContent value="requirements" className="space-y-4 mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Admission Requirements</CardTitle>
+                    <CardTitle>{t('program.admission')}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
                      <div>
-                      <h4 className="font-semibold mb-3">Academic Requirements</h4>
+                      <h4 className="font-semibold mb-3">{t('program.academic')}</h4>
                       <ul className="space-y-2">
                         {programData.admissionRequirements.academic.map((req, idx) => (
                           <li key={idx} className="flex items-start gap-2">
@@ -295,7 +297,7 @@ const ProgramDetail = () => {
                       </ul>
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-3">Test Requirements</h4>
+                      <h4 className="font-semibold mb-3">{t('program.tests')}</h4>
                       <ul className="space-y-2">
                         {programData.admissionRequirements.tests.map((test, idx) => (
                           <li key={idx} className="flex items-start gap-2">
@@ -306,7 +308,7 @@ const ProgramDetail = () => {
                       </ul>
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-3">Required Documents</h4>
+                      <h4 className="font-semibold mb-3">{t('program.documents')}</h4>
                       <ul className="space-y-2">
                         {programData.admissionRequirements.documents.map((doc, idx) => (
                           <li key={idx} className="flex items-start gap-2">
@@ -323,24 +325,24 @@ const ProgramDetail = () => {
               <TabsContent value="fees" className="space-y-4 mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Cost Breakdown</CardTitle>
+                    <CardTitle>{t('program.costBreakdown')}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                      <div className="grid sm:grid-cols-2 gap-4">
                       <div className="p-4 border rounded-lg">
-                        <p className="text-sm text-muted-foreground mb-1">Tuition</p>
+                        <p className="text-sm text-muted-foreground mb-1">{t('program.tuition')}</p>
                         <p className="font-semibold text-lg">{programData.fees.tuition}</p>
                       </div>
                       <div className="p-4 border rounded-lg">
-                        <p className="text-sm text-muted-foreground mb-1">Application Fee</p>
+                        <p className="text-sm text-muted-foreground mb-1">{t('program.appFee')}</p>
                         <p className="font-semibold text-lg">{programData.fees.applicationFee}</p>
                       </div>
                       <div className="p-4 border rounded-lg">
-                        <p className="text-sm text-muted-foreground mb-1">Living Expenses</p>
+                        <p className="text-sm text-muted-foreground mb-1">{t('program.living')}</p>
                         <p className="font-semibold text-lg">{programData.fees.livingExpenses}</p>
                       </div>
                       <div className="p-4 border rounded-lg">
-                        <p className="text-sm text-muted-foreground mb-1">Health Insurance</p>
+                        <p className="text-sm text-muted-foreground mb-1">{t('program.insurance')}</p>
                         <p className="font-semibold text-lg">{programData.fees.healthInsurance}</p>
                       </div>
                     </div>
@@ -351,7 +353,7 @@ const ProgramDetail = () => {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Award className="h-5 w-5" />
-                      Available Scholarships
+                      {t('program.scholarships')}
                     </CardTitle>
                   </CardHeader>
                    <CardContent className="space-y-4">
@@ -370,7 +372,7 @@ const ProgramDetail = () => {
                       </div>
                       ))
                     ) : (
-                      <p className="text-muted-foreground">No scholarships currently available. Contact the university for more information.</p>
+                      <p className="text-muted-foreground">{t('program.noScholarships')}</p>
                     )}
                   </CardContent>
                 </Card>
@@ -379,7 +381,7 @@ const ProgramDetail = () => {
               <TabsContent value="reviews" className="space-y-4 mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Student Reviews</CardTitle>
+                    <CardTitle>{t('program.studentReviews')}</CardTitle>
                   </CardHeader>
                    <CardContent className="space-y-4">
                     {programData.reviews.length > 0 ? (
@@ -401,7 +403,7 @@ const ProgramDetail = () => {
                       </div>
                       ))
                     ) : (
-                      <p className="text-muted-foreground">No reviews yet. Be the first to review this program!</p>
+                      <p className="text-muted-foreground">{t('program.noReviews')}</p>
                     )}
                   </CardContent>
                 </Card>
@@ -413,7 +415,7 @@ const ProgramDetail = () => {
           <div className="space-y-4">
             <Card className="sticky top-4">
               <CardHeader>
-                <CardTitle>Quick Facts</CardTitle>
+                <CardTitle>{t('program.quickFacts')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                  <div className="space-y-3 text-sm">
@@ -439,13 +441,13 @@ const ProgramDetail = () => {
 
                 <div className="pt-4 border-t space-y-2">
                   <Button className="w-full bg-gradient-accent hover:opacity-90">
-                    Apply Now
+                    {t('program.applyNow')}
                   </Button>
                   <Button variant="outline" className="w-full">
-                    Save Program
+                    {t('program.save')}
                   </Button>
                   <Button variant="ghost" className="w-full">
-                    Share
+                    {t('program.share')}
                   </Button>
                 </div>
               </CardContent>

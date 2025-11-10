@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -9,6 +10,7 @@ import { Search, TrendingUp, DollarSign, Briefcase, GraduationCap } from "lucide
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const CareerAdvisor = () => {
+  const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
 
   const careers = [
@@ -54,16 +56,16 @@ const CareerAdvisor = () => {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-accent rounded-full mb-4">
               <TrendingUp className="h-8 w-8 text-white" />
             </div>
-            <h1 className="text-4xl font-bold mb-2">Career Advisor</h1>
+            <h1 className="text-4xl font-bold mb-2">{t('careers.title')}</h1>
             <p className="text-xl text-muted-foreground">
-              Explore careers and discover the education path to reach your goals
+              {t('careers.subtitle')}
             </p>
           </div>
 
           <Tabs defaultValue="search" className="space-y-8">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="search">Search Careers</TabsTrigger>
-              <TabsTrigger value="questionnaire">Career Quiz</TabsTrigger>
+              <TabsTrigger value="search">{t('careers.searchTab')}</TabsTrigger>
+              <TabsTrigger value="questionnaire">{t('careers.quizTab')}</TabsTrigger>
             </TabsList>
 
             <TabsContent value="search" className="space-y-6">
@@ -72,7 +74,7 @@ const CareerAdvisor = () => {
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                     <Input
-                      placeholder="Search for any career (e.g., Software Engineer, Doctor, Teacher)..."
+                      placeholder={t('careers.search.placeholder')}
                       className="pl-10 h-12"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
@@ -100,7 +102,7 @@ const CareerAdvisor = () => {
                           </div>
                         </div>
                         <Button className="bg-gradient-accent">
-                          Learn More
+                          {t('careers.learnMore')}
                         </Button>
                       </div>
                     </CardHeader>
@@ -108,7 +110,7 @@ const CareerAdvisor = () => {
                       <div className="grid md:grid-cols-2 gap-4">
                         <div>
                           <h4 className="font-semibold mb-2 text-sm text-muted-foreground">
-                            PROS
+                            {t('careers.pros')}
                           </h4>
                           <ul className="space-y-1">
                             {career.pros.map((pro, i) => (
@@ -121,7 +123,7 @@ const CareerAdvisor = () => {
                         </div>
                         <div>
                           <h4 className="font-semibold mb-2 text-sm text-muted-foreground">
-                            CONS
+                            {t('careers.cons')}
                           </h4>
                           <ul className="space-y-1">
                             {career.cons.map((con, i) => (
@@ -137,7 +139,7 @@ const CareerAdvisor = () => {
                       <div>
                         <h4 className="font-semibold mb-2 text-sm text-muted-foreground flex items-center">
                           <Briefcase className="h-4 w-4 mr-2" />
-                          REQUIRED SKILLS
+                          {t('careers.requiredSkills')}
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {career.skills.map((skill, i) => (
@@ -151,7 +153,7 @@ const CareerAdvisor = () => {
                       <div>
                         <h4 className="font-semibold mb-2 text-sm text-muted-foreground flex items-center">
                           <GraduationCap className="h-4 w-4 mr-2" />
-                          RELATED STUDY FIELDS
+                          {t('careers.relatedFields')}
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {career.relatedFields.map((field, i) => (
@@ -164,7 +166,7 @@ const CareerAdvisor = () => {
 
                       <div>
                         <h4 className="font-semibold mb-2 text-sm text-muted-foreground">
-                          TOP UNIVERSITIES FOR THIS CAREER
+                          {t('careers.topUniversities')}
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {career.universities.map((uni, i) => (
@@ -183,9 +185,9 @@ const CareerAdvisor = () => {
             <TabsContent value="questionnaire" className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Career Personality Quiz</CardTitle>
+                  <CardTitle>{t('careers.quiz.title')}</CardTitle>
                   <p className="text-muted-foreground">
-                    Answer these questions to discover careers that match your interests and personality
+                    {t('careers.quiz.subtitle')}
                   </p>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -241,7 +243,7 @@ const CareerAdvisor = () => {
                   </div>
 
                   <Button className="w-full bg-gradient-accent" size="lg">
-                    Get My Career Recommendations
+                    {t('careers.quiz.getRecommendations')}
                   </Button>
                 </CardContent>
               </Card>

@@ -101,6 +101,8 @@ const translations = {
     'country.canada': 'Canada',
     'country.australia': 'Australia',
     'country.germany': 'Germany',
+    'country.uae': 'United Arab Emirates',
+    'country.malaysia': 'Malaysia',
     
     // Degree Types
     'degree.certificate': 'Certificate',
@@ -170,6 +172,40 @@ const translations = {
     'careers.quiz.title': 'Career Personality Quiz',
     'careers.quiz.subtitle': 'Answer these questions to discover careers that match your interests and personality',
     'careers.quiz.getRecommendations': 'Get My Career Recommendations',
+    
+    // Program Detail Page
+    'program.backToSearch': 'Back to Search',
+    'program.overview': 'Overview',
+    'program.requirements': 'Requirements',
+    'program.fees': 'Fees & Scholarships',
+    'program.reviews': 'Reviews',
+    'program.description': 'Program Description',
+    'program.outcomes': 'Career Outcomes',
+    'program.admission': 'Admission Requirements',
+    'program.academic': 'Academic Requirements',
+    'program.tests': 'Test Requirements',
+    'program.documents': 'Required Documents',
+    'program.costBreakdown': 'Cost Breakdown',
+    'program.tuition': 'Tuition',
+    'program.appFee': 'Application Fee',
+    'program.living': 'Living Expenses',
+    'program.insurance': 'Health Insurance',
+    'program.scholarships': 'Available Scholarships',
+    'program.studentReviews': 'Student Reviews',
+    'program.quickFacts': 'Quick Facts',
+    'program.duration': 'Duration',
+    'program.language': 'Language',
+    'program.startDate': 'Start Date',
+    'program.delivery': 'Delivery',
+    'program.applyNow': 'Apply Now',
+    'program.save': 'Save Program',
+    'program.share': 'Share',
+    'program.contact': 'Contact Counselor',
+    'program.loading': 'Loading program details...',
+    'program.notFound': 'Program not found',
+    'program.noScholarships': 'No scholarships currently available. Contact the university for more information.',
+    'program.noReviews': 'No reviews yet. Be the first to review this program!',
+    'program.worldRanking': 'World Ranking',
   },
   uz: {
     // Navbar
@@ -259,6 +295,8 @@ const translations = {
     'country.canada': 'Kanada',
     'country.australia': 'Avstraliya',
     'country.germany': 'Germaniya',
+    'country.uae': "Birlashgan Arab Amirliklari",
+    'country.malaysia': 'Malayziya',
     
     // Degree Types
     'degree.certificate': 'Sertifikat',
@@ -328,6 +366,40 @@ const translations = {
     'careers.quiz.title': 'Martaba Shaxsiyati Testi',
     'careers.quiz.subtitle': "Qiziqishlaringiz va shaxsingizga mos keladigan martabalarni kashf qilish uchun savollarga javob bering",
     'careers.quiz.getRecommendations': 'Martaba Tavsiyalarini Olish',
+    
+    // Program Detail Page
+    'program.backToSearch': 'Qidiruvga Qaytish',
+    'program.overview': "Umumiy Ma'lumot",
+    'program.requirements': 'Talablar',
+    'program.fees': "To'lovlar va Grantlar",
+    'program.reviews': 'Sharhlar',
+    'program.description': 'Dastur Tavsifi',
+    'program.outcomes': 'Martaba Natijalari',
+    'program.admission': 'Qabul Talablari',
+    'program.academic': "Akademik Talablar",
+    'program.tests': 'Test Talablari',
+    'program.documents': "Kerakli Hujjatlar",
+    'program.costBreakdown': "Xarajatlar Taqsimoti",
+    'program.tuition': "O'qish Narxi",
+    'program.appFee': 'Ariza To\'lovi',
+    'program.living': "Yashash Xarajatlari",
+    'program.insurance': "Tibbiy Sug'urta",
+    'program.scholarships': 'Mavjud Grantlar',
+    'program.studentReviews': 'Talabalar Sharhlari',
+    'program.quickFacts': "Tez Ma'lumotlar",
+    'program.duration': 'Davomiyligi',
+    'program.language': 'Til',
+    'program.startDate': 'Boshlanish Sanasi',
+    'program.delivery': "O'qitish Shakli",
+    'program.applyNow': 'Hozir Ariza Yuboring',
+    'program.save': 'Dasturni Saqlash',
+    'program.share': "Ulashish",
+    'program.contact': 'Maslahatchi bilan Aloqa',
+    'program.loading': "Dastur ma'lumotlari yuklanmoqda...",
+    'program.notFound': 'Dastur topilmadi',
+    'program.noScholarships': "Hozircha grantlar mavjud emas. Qo'shimcha ma'lumot uchun universitet bilan bog'laning.",
+    'program.noReviews': "Hali sharhlar yo'q. Birinchi bo'lib sharh qoldiring!",
+    'program.worldRanking': 'Jahon Reytingi',
   },
   ru: {
     // Navbar
@@ -417,6 +489,8 @@ const translations = {
     'country.canada': 'Канада',
     'country.australia': 'Австралия',
     'country.germany': 'Германия',
+    'country.uae': 'Объединенные Арабские Эмираты',
+    'country.malaysia': 'Малайзия',
     
     // Degree Types
     'degree.certificate': 'Сертификат',
@@ -486,13 +560,47 @@ const translations = {
     'careers.quiz.title': 'Тест Карьерной Личности',
     'careers.quiz.subtitle': 'Ответьте на вопросы, чтобы найти карьеры, соответствующие вашим интересам и личности',
     'careers.quiz.getRecommendations': 'Получить Карьерные Рекомендации',
+    
+    // Program Detail Page
+    'program.backToSearch': 'Вернуться к Поиску',
+    'program.overview': 'Обзор',
+    'program.requirements': 'Требования',
+    'program.fees': 'Стоимость и Стипендии',
+    'program.reviews': 'Отзывы',
+    'program.description': 'Описание Программы',
+    'program.outcomes': 'Карьерные Перспективы',
+    'program.admission': 'Требования к Поступлению',
+    'program.academic': 'Академические Требования',
+    'program.tests': 'Требования к Тестам',
+    'program.documents': 'Необходимые Документы',
+    'program.costBreakdown': 'Разбивка Расходов',
+    'program.tuition': 'Стоимость Обучения',
+    'program.appFee': 'Стоимость Подачи',
+    'program.living': 'Расходы на Проживание',
+    'program.insurance': 'Медицинская Страховка',
+    'program.scholarships': 'Доступные Стипендии',
+    'program.studentReviews': 'Отзывы Студентов',
+    'program.quickFacts': 'Краткая Информация',
+    'program.duration': 'Длительность',
+    'program.language': 'Язык',
+    'program.startDate': 'Дата Начала',
+    'program.delivery': 'Формат Обучения',
+    'program.applyNow': 'Подать Заявку',
+    'program.save': 'Сохранить Программу',
+    'program.share': 'Поделиться',
+    'program.contact': 'Связаться с Консультантом',
+    'program.loading': 'Загрузка информации о программе...',
+    'program.notFound': 'Программа не найдена',
+    'program.noScholarships': 'Стипендии в настоящее время недоступны. Свяжитесь с университетом для получения дополнительной информации.',
+    'program.noReviews': 'Отзывов пока нет. Станьте первым, кто оставит отзыв об этой программе!',
+    'program.worldRanking': 'Мировой Рейтинг',
   }
 };
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(() => {
     const stored = localStorage.getItem('language');
-    return (stored as Language) || 'en';
+    return (stored as Language) || 'uz';
   });
 
   const setLanguage = (lang: Language) => {
