@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -17,6 +18,7 @@ import { Search, Award, Calendar, MapPin, DollarSign } from "lucide-react";
 
 const Scholarships = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
 
   const scholarships = [
@@ -257,7 +259,7 @@ const Scholarships = () => {
 
                   {/* Actions */}
                   <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                    <Button className="bg-gradient-accent flex-1">
+                    <Button className="bg-gradient-accent flex-1" onClick={() => navigate(`/scholarship/${scholarship.id}`)}>
                       {t('scholarships.viewDetails')}
                     </Button>
                     <Button variant="outline" className="flex-1">

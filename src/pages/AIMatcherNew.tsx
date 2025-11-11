@@ -74,7 +74,7 @@ const AIMatcherNew = () => {
       
       if (data.error) {
         toast({
-          title: "Error",
+          title: t('toast.error'),
           description: data.error,
           variant: "destructive",
         });
@@ -86,8 +86,8 @@ const AIMatcherNew = () => {
       }
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to fetch matches. Please try again.",
+        title: t('toast.error'),
+        description: t('toast.fetchError'),
         variant: "destructive",
       });
     } finally {

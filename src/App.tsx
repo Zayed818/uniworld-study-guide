@@ -6,7 +6,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Universities from "./pages/Universities";
 import Scholarships from "./pages/Scholarships";
+import ScholarshipDetail from "./pages/ScholarshipDetail";
 import CareerAdvisor from "./pages/CareerAdvisor";
+import CareerDetail from "./pages/CareerDetail";
 import AIMatcher from "./pages/AIMatcher";
 import AIMatcherNew from "./pages/AIMatcherNew";
 import ProgramDetail from "./pages/ProgramDetail";
@@ -24,7 +26,9 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/universities" element={<Universities />} />
           <Route path="/scholarships" element={<Scholarships />} />
+          <Route path="/scholarship/:id" element={<ScholarshipDetail />} />
           <Route path="/careers" element={<CareerAdvisor />} />
+          <Route path="/career/:id" element={<CareerDetail />} />
           <Route path="/ai-matcher" element={<AIMatcherNew />} />
           <Route path="/ai-matcher-old" element={<AIMatcher />} />
           <Route path="/program/:id" element={<ProgramDetail />} />

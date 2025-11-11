@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -11,10 +12,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const CareerAdvisor = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
 
   const careers = [
     {
+      id: "software-engineer",
       title: "Software Engineer",
       averageSalary: "$110,000 - $160,000",
       demand: "Very High",
@@ -25,6 +28,7 @@ const CareerAdvisor = () => {
       universities: ["Stanford", "MIT", "Carnegie Mellon"]
     },
     {
+      id: "data-scientist",
       title: "Data Scientist",
       averageSalary: "$95,000 - $150,000",
       demand: "Very High",
@@ -101,7 +105,10 @@ const CareerAdvisor = () => {
                             </Badge>
                           </div>
                         </div>
-                        <Button className="bg-gradient-accent">
+                        <Button 
+                          className="bg-gradient-accent"
+                          onClick={() => navigate(`/career/${career.id}`)}
+                        >
                           {t('careers.learnMore')}
                         </Button>
                       </div>

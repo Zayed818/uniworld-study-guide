@@ -400,6 +400,28 @@ const translations = {
     'program.noScholarships': "Hozircha grantlar mavjud emas. Qo'shimcha ma'lumot uchun universitet bilan bog'laning.",
     'program.noReviews': "Hali sharhlar yo'q. Birinchi bo'lib sharh qoldiring!",
     'program.worldRanking': 'Jahon Reytingi',
+
+    // Toast messages
+    'toast.error': 'Xatolik',
+    'toast.fetchError': 'Ma\'lumotlarni yuklashda xatolik. Qaytadan urinib ko\'ring.',
+    'toast.success': 'Muvaffaqiyat',
+    'toast.saved': 'Muvaffaqiyatli saqlandi',
+
+    // Scholarship Detail
+    'scholarship.detailTitle': 'Stipendiya Tafsilotlari',
+    'scholarship.aboutTitle': 'Bu Stipendiya Haqida',
+    'scholarship.eligibilityTitle': 'Mos Kelish Talablari',
+    'scholarship.howToApplyTitle': 'Qanday Ariza Topshirish',
+    'scholarship.deadlineTitle': 'Muhim Sanalar',
+    'scholarship.apply': 'Hozir Ariza Topshirish',
+    'scholarship.back': 'Stipendiyalarga Qaytish',
+
+    // Career Detail
+    'career.detailTitle': 'Kasb Tafsilotlari',
+    'career.overview': 'Umumiy Ko\'rinish',
+    'career.education': 'Ta\'lim Talablari',
+    'career.outlook': 'Martaba Istiqbollari',
+    'career.back': 'Kasblarga Qaytish',
   },
   ru: {
     // Navbar
@@ -594,6 +616,28 @@ const translations = {
     'program.noScholarships': 'Стипендии в настоящее время недоступны. Свяжитесь с университетом для получения дополнительной информации.',
     'program.noReviews': 'Отзывов пока нет. Станьте первым, кто оставит отзыв об этой программе!',
     'program.worldRanking': 'Мировой Рейтинг',
+
+    // Toast messages
+    'toast.error': 'Ошибка',
+    'toast.fetchError': 'Не удалось загрузить данные. Попробуйте снова.',
+    'toast.success': 'Успешно',
+    'toast.saved': 'Успешно сохранено',
+
+    // Scholarship Detail
+    'scholarship.detailTitle': 'Детали Стипендии',
+    'scholarship.aboutTitle': 'Об Этой Стипендии',
+    'scholarship.eligibilityTitle': 'Требования к Участникам',
+    'scholarship.howToApplyTitle': 'Как Подать Заявку',
+    'scholarship.deadlineTitle': 'Важные Даты',
+    'scholarship.apply': 'Подать Заявку',
+    'scholarship.back': 'Вернуться к Стипендиям',
+
+    // Career Detail
+    'career.detailTitle': 'Детали Карьеры',
+    'career.overview': 'Обзор',
+    'career.education': 'Требования к Образованию',
+    'career.outlook': 'Перспективы Карьеры',
+    'career.back': 'Вернуться к Карьерам',
   }
 };
 
