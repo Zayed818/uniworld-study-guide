@@ -92,7 +92,7 @@ const Scholarships = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-accent rounded-full mb-4">
@@ -106,8 +106,8 @@ const Scholarships = () => {
         </div>
 
         {/* Search and Filters */}
-        <Card className="mb-8">
-          <CardContent className="pt-6">
+          <Card className="mb-8">
+            <CardContent className="p-4 md:p-6">
             <div className="grid gap-4">
               {/* Search Bar */}
               <div className="relative">
@@ -200,7 +200,7 @@ const Scholarships = () => {
         <div className="grid gap-6">
           {scholarships.map((scholarship) => (
             <Card key={scholarship.id} className="hover:shadow-lg transition-all border-2 hover:border-accent">
-              <CardContent className="pt-6">
+              <CardContent className="p-4 md:p-6">
                 <div className="space-y-4">
                   {/* Header */}
                   <div className="flex items-start justify-between gap-4">

@@ -148,7 +148,7 @@ const ProgramDetail = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 py-8">
         {/* Back Button */}
         <Button 
           variant="ghost" 
@@ -164,7 +164,7 @@ const ProgramDetail = () => {
           <div className="space-y-6">
             {/* Header Section */}
             <Card className="border-2">
-              <CardContent className="pt-6">
+              <CardContent className="p-4 md:p-6">
                   <div className="flex gap-4 mb-6">
                   <div className="w-20 h-20 bg-gradient-to-br from-primary to-primary-glow rounded-lg flex items-center justify-center shrink-0">
                     <GraduationCap className="h-10 w-10 text-white" />
@@ -254,13 +254,13 @@ const ProgramDetail = () => {
 
               <TabsContent value="overview" className="space-y-4 mt-6">
                 <Card>
-                  <CardHeader>
+                  <CardHeader className="p-4 md:p-6">
                     <CardTitle className="flex items-center gap-2">
                       <BookOpen className="h-5 w-5" />
                       {t('program.description')}
                     </CardTitle>
                   </CardHeader>
-                   <CardContent className="space-y-4">
+                   <CardContent className="p-4 md:p-6 pt-0 space-y-4">
                     <p className="text-muted-foreground leading-relaxed">
                       {programData.overview.description}
                     </p>
@@ -280,11 +280,11 @@ const ProgramDetail = () => {
               </TabsContent>
 
               <TabsContent value="requirements" className="space-y-4 mt-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{t('program.admission')}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
+              <Card>
+                <CardHeader className="p-4 md:p-6">
+                  <CardTitle>{t('program.admission')}</CardTitle>
+                </CardHeader>
+                <CardContent className="p-4 md:p-6 pt-0 space-y-6">
                      <div>
                       <h4 className="font-semibold mb-3">{t('program.academic')}</h4>
                       <ul className="space-y-2">
@@ -324,10 +324,10 @@ const ProgramDetail = () => {
 
               <TabsContent value="fees" className="space-y-4 mt-6">
                 <Card>
-                  <CardHeader>
+                  <CardHeader className="p-4 md:p-6">
                     <CardTitle>{t('program.costBreakdown')}</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
+                  <CardContent className="p-4 md:p-6 pt-0 space-y-4">
                      <div className="grid sm:grid-cols-2 gap-4">
                       <div className="p-4 border rounded-lg">
                         <p className="text-sm text-muted-foreground mb-1">{t('program.tuition')}</p>
@@ -350,13 +350,13 @@ const ProgramDetail = () => {
                 </Card>
 
                 <Card>
-                  <CardHeader>
+                  <CardHeader className="p-4 md:p-6">
                     <CardTitle className="flex items-center gap-2">
                       <Award className="h-5 w-5" />
                       {t('program.scholarships')}
                     </CardTitle>
                   </CardHeader>
-                   <CardContent className="space-y-4">
+                   <CardContent className="p-4 md:p-6 pt-0 space-y-4">
                     {programData.fees.scholarships.length > 0 ? (
                       programData.fees.scholarships.map((scholarship, idx) => (
                       <div key={idx} className="p-4 border rounded-lg space-y-2">
@@ -380,10 +380,10 @@ const ProgramDetail = () => {
 
               <TabsContent value="reviews" className="space-y-4 mt-6">
                 <Card>
-                  <CardHeader>
+                  <CardHeader className="p-4 md:p-6">
                     <CardTitle>{t('program.studentReviews')}</CardTitle>
                   </CardHeader>
-                   <CardContent className="space-y-4">
+                   <CardContent className="p-4 md:p-6 pt-0 space-y-4">
                     {programData.reviews.length > 0 ? (
                       programData.reviews.map((review, idx) => (
                       <div key={idx} className="p-4 border rounded-lg space-y-2">
@@ -412,12 +412,12 @@ const ProgramDetail = () => {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-4">
-            <Card className="sticky top-4">
-              <CardHeader>
+          <div className="space-y-4 lg:sticky lg:top-4 lg:self-start">
+            <Card>
+              <CardHeader className="p-4 md:p-6">
                 <CardTitle>{t('program.quickFacts')}</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="p-4 md:p-6 pt-0 space-y-4">
                  <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Degree Type</span>

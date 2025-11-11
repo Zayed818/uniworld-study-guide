@@ -197,7 +197,7 @@ const Universities = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">{t('universities.title')}</h1>
@@ -208,7 +208,7 @@ const Universities = () => {
 
         {/* Search and Filters */}
         <Card className="mb-8">
-          <CardContent className="pt-6">
+          <CardContent className="p-4 md:p-6">
             <div className="grid gap-4">
               {/* Search Bar */}
               <div className="relative">
@@ -317,7 +317,7 @@ const Universities = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayedPrograms.map((program) => (
             <Card key={program.id} className="hover:shadow-lg transition-all border-2 hover:border-primary flex flex-col">
-              <CardContent className="pt-6 flex-1 flex flex-col">
+              <CardContent className="p-4 md:p-6 flex-1 flex flex-col">
                 {/* University Info */}
                 <div className="mb-4">
                   <div className="flex items-start gap-3 mb-3">

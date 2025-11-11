@@ -50,7 +50,7 @@ const CareerAdvisor = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 py-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-accent rounded-full mb-4">
@@ -70,7 +70,7 @@ const CareerAdvisor = () => {
 
             <TabsContent value="search" className="space-y-6">
               <Card>
-                <CardContent className="pt-6">
+                <CardContent className="p-4 md:p-6">
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                     <Input
@@ -86,7 +86,7 @@ const CareerAdvisor = () => {
               <div className="space-y-6">
                 {careers.map((career, index) => (
                   <Card key={index} className="border-2 hover:border-primary transition-all">
-                    <CardHeader>
+                    <CardHeader className="p-4 md:p-6">
                       <div className="flex items-start justify-between">
                         <div>
                           <CardTitle className="text-2xl mb-2">{career.title}</CardTitle>
@@ -106,7 +106,7 @@ const CareerAdvisor = () => {
                         </Button>
                       </div>
                     </CardHeader>
-                    <CardContent className="space-y-4">
+                    <CardContent className="p-4 md:p-6 pt-0 space-y-4">
                       <div className="grid md:grid-cols-2 gap-4">
                         <div>
                           <h4 className="font-semibold mb-2 text-sm text-muted-foreground">
@@ -184,13 +184,13 @@ const CareerAdvisor = () => {
 
             <TabsContent value="questionnaire" className="space-y-6">
               <Card>
-                <CardHeader>
+                <CardHeader className="p-4 md:p-6">
                   <CardTitle>{t('careers.quiz.title')}</CardTitle>
                   <p className="text-muted-foreground">
                     {t('careers.quiz.subtitle')}
                   </p>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="p-4 md:p-6 pt-0 space-y-6">
                   <div>
                     <h4 className="font-semibold mb-3">1. What type of work environment do you prefer?</h4>
                     <div className="space-y-2">
